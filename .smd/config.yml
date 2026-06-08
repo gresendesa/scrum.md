@@ -1,0 +1,25 @@
+project_name: scrum.md
+owner: Guilherme
+language: pt-BR
+timezone: America/Sao_Paulo
+memory_root: scrum
+entrypoint: AGENTS.md
+
+commands:
+  test:
+  build:
+  lint:
+
+gates:
+  require_po_acceptance: true
+  require_tests: true
+  require_build: false
+  require_mdbind_validate: true
+  require_memory_update: true
+
+git:
+  commit_policy: one_commit_per_sprint
+  default_branch: main
+
+templates:
+  profile: standard
