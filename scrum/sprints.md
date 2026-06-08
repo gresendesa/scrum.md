@@ -68,6 +68,7 @@ created_at: 2026-06-08
 updated_at: 2026-06-08
 sprints:
   - SPR-2026-01
+  - SPR-2026-02
 tags: [sprints, registry]
 ```
 
@@ -89,6 +90,24 @@ obsolete_reason: PO clarified that Sprint 01 should not frame implementation wor
 ```
 
 [@ref: Detailed sprint](sprints/SPR-2026-01.md#sprint.SPR-2026-01)
+
+### SPR-2026-02 - Close documentation gaps
+
+```yaml
+section: sprints.SPR-2026-02
+sprint_id: SPR-2026-02
+title: Close documentation gaps
+status: review
+focus: Review and update essential project documentation before implementation.
+po_priority_summary: B-001 priority 1 critical.
+sprint_risk: medium
+detail_file: scrum/sprints/SPR-2026-02.md
+owner: Guilherme
+created_at: 2026-06-08
+updated_at: 2026-06-08
+```
+
+[@ref: Detailed sprint](sprints/SPR-2026-02.md#sprint.SPR-2026-02)
 
 ### SPR-YYYY-NN Template
 

@@ -197,8 +197,8 @@ During planning, the following are mandatory:
 6. Define execution order.
 7. Register expected blockers and mitigations.
 
-[@ref: Backlog consolidator](backlog.md#backlog)
-[@ref: Sprint consolidator](sprint.md#sprints)
+[@ref: Backlog consolidator](scrum/backlog.md#backlog)
+[@ref: Sprint consolidator](scrum/sprints.md#sprints)
 
 ### PO Priority Scale
 
@@ -293,7 +293,7 @@ At sprint closing, the following are mandatory:
 2. Execute one commit per sprint in each repository involved in the sprint scope.
 
 [@ref: Definition of Done](CONSTITUTION.md#constitution.definition-of-done)
-[@ref: Sprint records](sprint.md#sprints.registered)
+[@ref: Sprint records](scrum/sprints.md#sprints.registered)
 
 ## Agent Memory Management
 
@@ -309,10 +309,10 @@ tags: [memory, agent, governance]
 The `scrum/` directory is the operational memory of the project and must follow these rules.
 
 [@include: MDBind notation policy](CONSTITUTION.md#constitution.agent-memory-management.mdbind-notation-policy)
-[@ref: Backlog consolidator](backlog.md#backlog)
-[@ref: Sprint consolidator](sprint.md#sprints)
-[@ref: Experience memory](experience.md#experience)
-[@ref: Decision memory](decisions.md#decisions)
+[@ref: Backlog consolidator](scrum/backlog.md#backlog)
+[@ref: Sprint consolidator](scrum/sprints.md#sprints)
+[@ref: Experience memory](scrum/experience.md#experience)
+[@ref: Decision memory](scrum/decisions.md#decisions)
 
 ### MDBind Notation Policy
 
@@ -380,7 +380,7 @@ tags: [backlog, memory]
 * Must act as the synthetic backlog consolidator.
 * Must contain only ID, title, status, PO priority, risk, and pointer to the detailed file.
 
-[@ref: Backlog file](backlog.md#backlog)
+[@ref: Backlog file](scrum/backlog.md#backlog)
 
 ### Backlog Item Details
 
@@ -403,14 +403,14 @@ section: constitution.agent-memory-management.sprints
 title: Sprint Consolidator
 status: active
 owner: "{{ owner }}"
-path: scrum/sprint.md
+path: scrum/sprints.md
 tags: [sprints, memory]
 ```
 
 * Must act as the synthetic sprint consolidator.
 * Must contain only summarized status, focus, risk, and pointer to the detailed file.
 
-[@ref: Sprint file](sprint.md#sprints)
+[@ref: Sprint file](scrum/sprints.md#sprints)
 
 ### Sprint Details
 
@@ -419,7 +419,7 @@ section: constitution.agent-memory-management.sprint-details
 title: Sprint Details
 status: active
 owner: "{{ owner }}"
-path: scrum/sprint/SPR-YYYY-NN.md
+path: scrum/sprints/SPR-YYYY-NN.md
 tags: [sprints, memory, details]
 ```
 
@@ -454,7 +454,7 @@ tags: [experience, retrospective, incident, memory]
 * Must be updated in every retrospective or relevant incident.
 * Must register problem, root cause, corrective action, and prevention.
 
-[@ref: Experience file](experience.md#experience)
+[@ref: Experience file](scrum/experience.md#experience)
 
 ### Decision Memory
 
@@ -470,7 +470,7 @@ tags: [decisions, governance, memory]
 * Must maintain the history of decisions about memory architecture and process governance.
 * Each decision must register context, choice, impact, and date.
 
-[@ref: Decisions file](decisions.md#decisions)
+[@ref: Decisions file](scrum/decisions.md#decisions)
 
 ### History Rule
 

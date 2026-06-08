@@ -135,28 +135,11 @@ owner: Guilherme
 created_at: 2026-06-08
 updated_at: 2026-06-08
 item_status: planned
-items:
-  - B-001
+items: []
 tags: [backlog, planned]
 ```
 
-#### B-001 - Close documentation gaps before implementation
-
-```yaml
-section: backlog.synthetic-summary.planned.B-001
-id: B-001
-title: Close documentation gaps before implementation
-status: planned
-po_priority: 1
-risk: medium
-linked_sprint:
-detail_file: scrum/backlog/B-001.md
-owner: Guilherme
-created_at: 2026-06-08
-updated_at: 2026-06-08
-```
-
-[@ref: Detailed backlog item](backlog/B-001.md#backlog.item.B-001)
+No items registered.
 
 ### Doing
 
@@ -168,11 +151,29 @@ owner: Guilherme
 created_at: 2026-06-08
 updated_at: 2026-06-08
 item_status: doing
-items: []
+items:
+  - B-001
 tags: [backlog, doing]
 ```
 
-No items registered.
+#### B-001 - Close documentation gaps before implementation
+
+```yaml
+section: backlog.synthetic-summary.doing.B-001
+id: B-001
+title: Close documentation gaps before implementation
+status: doing
+po_priority: 1
+risk: medium
+linked_sprint: SPR-2026-02
+detail_file: scrum/backlog/B-001.md
+owner: Guilherme
+created_at: 2026-06-08
+updated_at: 2026-06-08
+```
+
+[@ref: Detailed backlog item](backlog/B-001.md#backlog.item.B-001)
+[@ref: Planned sprint](sprints/SPR-2026-02.md#sprint.SPR-2026-02)
 
 ## Synthetic Template for New Items
 

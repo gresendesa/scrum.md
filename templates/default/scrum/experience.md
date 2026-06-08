@@ -15,9 +15,9 @@ tags: [experience, retrospective, incident, process, memory]
 This file records problems observed in the development process, their causes, and how recurrence should be prevented.
 
 [@include: Experience record format](experience.md#experience.record-format)
-[@ref: Experience memory rule](CONSTITUTION.md#constitution.agent-memory-management.experience)
+[@ref: Experience memory rule](../CONSTITUTION.md#constitution.agent-memory-management.experience)
 [@ref: Decision memory](decisions.md#decisions)
-[@ref: Definition of Done](CONSTITUTION.md#constitution.definition-of-done)
+[@ref: Definition of Done](../CONSTITUTION.md#constitution.definition-of-done)
 
 ## Objective
 
@@ -86,10 +86,10 @@ updated_at:
 Record narrative goes here.
 
 [@ref: Related decision](decisions.md#decisions.DEC-XXX)
-[@ref: Related sprint](sprints/SPR-YYYY-NN.md#sprint.SPR-YYYY-NN)
-[@ref: Related backlog item](backlog/B-XXX.md#backlog.item.B-XXX)
+Related sprint URI: `sprints/SPR-YYYY-NN.md#sprint.SPR-YYYY-NN`
+Related backlog item URI: `backlog/B-XXX.md#backlog.item.B-XXX`
 
-[@ref: History rule](CONSTITUTION.md#constitution.agent-memory-management.history)
+[@ref: History rule](../CONSTITUTION.md#constitution.agent-memory-management.history)
 
 ## Records
 

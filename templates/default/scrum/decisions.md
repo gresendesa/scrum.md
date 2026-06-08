@@ -15,9 +15,9 @@ tags: [decisions, governance, memory]
 This file records the decision history about the memory architecture and governance process of this workspace.
 
 [@include: Decision record format](decisions.md#decisions.record-format)
-[@ref: Decision memory rule](CONSTITUTION.md#constitution.agent-memory-management.decisions)
-[@ref: Memory policy](CONSTITUTION.md#constitution.memory-policy)
-[@ref: MDBind notation policy](CONSTITUTION.md#constitution.agent-memory-management.mdbind-notation-policy)
+[@ref: Decision memory rule](../CONSTITUTION.md#constitution.agent-memory-management.decisions)
+[@ref: Memory policy](../CONSTITUTION.md#constitution.memory-policy)
+[@ref: MDBind notation policy](../CONSTITUTION.md#constitution.agent-memory-management.mdbind-notation-policy)
 
 ## Objective
 
@@ -83,9 +83,9 @@ updated_at:
 Decision narrative goes here.
 
 [@ref: Related experience](experience.md#experience.EXP-XXX)
-[@ref: Related constitution rule](CONSTITUTION.md#constitution.memory-policy)
+[@ref: Related constitution rule](../CONSTITUTION.md#constitution.memory-policy)
 
-[@ref: History rule](CONSTITUTION.md#constitution.agent-memory-management.history)
+[@ref: History rule](../CONSTITUTION.md#constitution.agent-memory-management.history)
 
 ## History
 

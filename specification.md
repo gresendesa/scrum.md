@@ -31,8 +31,8 @@ A ferramenta assume que:
 4. O diretório `scrum/` é a memória oficial do projeto.
 5. Todos os arquivos Markdown de memória seguem a notação `mdbind`.
 
-[@ref: Constitution](CONSTITUTION.md#constitution)
-[@ref: MDBind notation policy](CONSTITUTION.md#constitution.agent-memory-management.mdbind-notation-policy)
+[@ref: Constitution](scrum/CONSTITUTION.md#constitution)
+[@ref: MDBind notation policy](scrum/CONSTITUTION.md#constitution.agent-memory-management.mdbind-notation-policy)
 
 ## 2. Problema a Resolver
 
@@ -209,7 +209,7 @@ Relações entre seções devem usar:
 * `@ref` para referência contextual ou dependência;
 * `@include` para composição estrutural.
 
-[@ref: MDBind notation policy](CONSTITUTION.md#constitution.agent-memory-management.mdbind-notation-policy)
+[@ref: MDBind notation policy](scrum/CONSTITUTION.md#constitution.agent-memory-management.mdbind-notation-policy)
 
 ### 4.4 Histórico Não Destrutivo
 
@@ -229,7 +229,7 @@ Conteúdo antigo deve ser:
 * acompanhado de motivo e data;
 * mantido rastreável para auditoria futura.
 
-[@ref: History rule](CONSTITUTION.md#constitution.agent-memory-management.history)
+[@ref: History rule](scrum/CONSTITUTION.md#constitution.agent-memory-management.history)
 
 ### 4.5 Gates Inegociáveis
 
@@ -252,8 +252,8 @@ O fechamento de sprint deve exigir:
 * registro da entrega;
 * commit final após aprovação.
 
-[@ref: Definition of Done](CONSTITUTION.md#constitution.definition-of-done)
-[@ref: Sprint closing gate](CONSTITUTION.md#constitution.sprint-closing-gate)
+[@ref: Definition of Done](scrum/CONSTITUTION.md#constitution.definition-of-done)
+[@ref: Sprint closing gate](scrum/CONSTITUTION.md#constitution.sprint-closing-gate)
 
 ## 5. Papéis
 
@@ -392,8 +392,8 @@ São consolidadores oficiais:
 
 Eles não devem conter detalhes extensos que pertencem aos arquivos individuais.
 
-[@ref: Backlog consolidator](backlog.md#backlog)
-[@ref: Sprints consolidator](sprints.md#sprints)
+[@ref: Backlog consolidator](scrum/backlog.md#backlog)
+[@ref: Sprints consolidator](scrum/sprints.md#sprints)
 
 ### 6.2 Arquivos Detalhados
 
@@ -1590,7 +1590,7 @@ Um item só pode ser `done` se:
 * experiência relevante foi registrada;
 * PO aceitou quando o item for parte de entrega visível.
 
-[@ref: Constitution Definition of Done](CONSTITUTION.md#constitution.definition-of-done)
+[@ref: Constitution Definition of Done](scrum/CONSTITUTION.md#constitution.definition-of-done)
 
 ## 22. Integração com MDBind
 
@@ -1623,7 +1623,7 @@ A integração deve respeitar:
 * falha em links quebrados;
 * falha em ciclos de include.
 
-[@ref: MDBind notation policy](CONSTITUTION.md#constitution.agent-memory-management.mdbind-notation-policy)
+[@ref: MDBind notation policy](scrum/CONSTITUTION.md#constitution.agent-memory-management.mdbind-notation-policy)
 
 ## 23. Templates
 
@@ -1927,8 +1927,8 @@ O resultado esperado é um fluxo em que:
 * os gates protegem a qualidade;
 * o histórico permanece auditável.
 
-[@ref: Constitution](CONSTITUTION.md#constitution)
-[@ref: Backlog consolidator](backlog.md#backlog)
-[@ref: Sprints consolidator](sprints.md#sprints)
-[@ref: Decision memory](decisions.md#decisions)
-[@ref: Experience memory](experience.md#experience)
+[@ref: Constitution](scrum/CONSTITUTION.md#constitution)
+[@ref: Backlog consolidator](scrum/backlog.md#backlog)
+[@ref: Sprints consolidator](scrum/sprints.md#sprints)
+[@ref: Decision memory](scrum/decisions.md#decisions)
+[@ref: Experience memory](scrum/experience.md#experience)

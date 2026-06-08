@@ -18,9 +18,9 @@ This file is the synthetic consolidator for backlog items.
 Full details for each backlog item are stored in dedicated files under `scrum/backlog/`.
 
 [@include: Backlog convention](backlog.md#backlog.convention)
-[@ref: Constitution backlog rules](CONSTITUTION.md#constitution.agent-memory-management.backlog)
-[@ref: Backlog ID convention](CONSTITUTION.md#constitution.naming-convention.backlog-items)
-[@ref: PO priority rule](CONSTITUTION.md#constitution.sprint-planning.po-priority-rule)
+[@ref: Constitution backlog rules](../CONSTITUTION.md#constitution.agent-memory-management.backlog)
+[@ref: Backlog ID convention](../CONSTITUTION.md#constitution.naming-convention.backlog-items)
+[@ref: PO priority rule](../CONSTITUTION.md#constitution.sprint-planning.po-priority-rule)
 
 ## Objective
 
@@ -55,7 +55,7 @@ tags: [convention, backlog, ids]
 * Backlog item ID: `B-XXX`.
 * Detailed file: `scrum/backlog/B-XXX.md`.
 
-[@ref: Backlog item details rule](CONSTITUTION.md#constitution.agent-memory-management.backlog-items)
+[@ref: Backlog item details rule](../CONSTITUTION.md#constitution.agent-memory-management.backlog-items)
 
 ## Synthetic Item Summary
 
@@ -183,8 +183,8 @@ created_at:
 updated_at:
 ```
 
-[@ref: Detailed backlog item](backlog/B-XXX.md#backlog.item.B-XXX)
+Detailed backlog item URI: `backlog/B-XXX.md#backlog.item.B-XXX`
 ```
 
-[@ref: Record standard](CONSTITUTION.md#constitution.record-standard)
-[@ref: Default statuses](CONSTITUTION.md#constitution.record-standard.statuses)
+[@ref: Record standard](../CONSTITUTION.md#constitution.record-standard)
+[@ref: Default statuses](../CONSTITUTION.md#constitution.record-standard.statuses)
