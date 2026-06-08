@@ -70,6 +70,8 @@ tags: [rules, governance]
 * Automated tests are mandatory in the development process.
 * Sprint commits only occur after explicit PO acceptance.
 * Technical closure must follow one commit per sprint per repository involved.
+* Implementation work can start only after the scope is specified and explicitly approved by the PO.
+* Scrum memory files must avoid excessive verbosity and keep only essential information.
 
 ## Strategic Priorities
 
@@ -131,6 +133,7 @@ tags: [memory, governance]
 * Process learnings and incidents are recorded in `scrum/experience.md`.
 * Architecture notes are recorded in `scrum/architecture.md`.
 * Historical records must be marked `obsolete` or `superseded` instead of being deleted.
+* New backlog, sprint, decision, experience, and architecture records must be concise and limited to operationally useful details.
 
 ## Naming Convention
 

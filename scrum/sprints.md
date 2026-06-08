@@ -66,11 +66,29 @@ status: active
 owner: Guilherme
 created_at: 2026-06-08
 updated_at: 2026-06-08
-sprints: []
+sprints:
+  - SPR-2026-01
 tags: [sprints, registry]
 ```
 
-No concrete sprints registered yet.
+### SPR-2026-01 - Document smd CLI MVP Planning
+
+```yaml
+section: sprints.SPR-2026-01
+sprint_id: SPR-2026-01
+title: Document smd CLI MVP Planning
+status: obsolete
+focus: Obsoleted because the intended scope was documentation review, not implementation planning.
+po_priority_summary: B-001 priority 1 critical.
+sprint_risk: medium
+detail_file: scrum/sprints/SPR-2026-01.md
+owner: Guilherme
+created_at: 2026-06-08
+updated_at: 2026-06-08
+obsolete_reason: PO clarified that Sprint 01 should not frame implementation work.
+```
+
+[@ref: Detailed sprint](sprints/SPR-2026-01.md#sprint.SPR-2026-01)
 
 ### SPR-YYYY-NN Template
 
@@ -94,4 +112,3 @@ Use this template when registering a new sprint.
 
 [@ref: Risk calculation](CONSTITUTION.md#constitution.sprint-planning.sprint-risk-calculation)
 [@ref: PO priority scale](CONSTITUTION.md#constitution.sprint-planning.po-priority-scale)
-

@@ -103,28 +103,11 @@ owner: Guilherme
 created_at: 2026-06-08
 updated_at: 2026-06-08
 item_status: todo
-items:
-  - B-001
+items: []
 tags: [backlog, pending]
 ```
 
-#### B-001 - Implementar MVP da CLI smd
-
-```yaml
-section: backlog.synthetic-summary.pending.B-001
-id: B-001
-title: Implementar MVP da CLI smd
-status: todo
-po_priority:
-risk: high
-linked_sprint:
-detail_file: scrum/backlog/B-001.md
-owner: Guilherme
-created_at: 2026-06-08
-updated_at: 2026-06-08
-```
-
-[@ref: Detailed backlog item](backlog/B-001.md#backlog.item.B-001)
+No items registered.
 
 ### Refined
 
@@ -152,11 +135,28 @@ owner: Guilherme
 created_at: 2026-06-08
 updated_at: 2026-06-08
 item_status: planned
-items: []
+items:
+  - B-001
 tags: [backlog, planned]
 ```
 
-No items registered.
+#### B-001 - Close documentation gaps before implementation
+
+```yaml
+section: backlog.synthetic-summary.planned.B-001
+id: B-001
+title: Close documentation gaps before implementation
+status: planned
+po_priority: 1
+risk: medium
+linked_sprint:
+detail_file: scrum/backlog/B-001.md
+owner: Guilherme
+created_at: 2026-06-08
+updated_at: 2026-06-08
+```
+
+[@ref: Detailed backlog item](backlog/B-001.md#backlog.item.B-001)
 
 ### Doing
 

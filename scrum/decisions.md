@@ -77,6 +77,7 @@ decisions:
   - DEC-001
   - DEC-002
   - DEC-003
+  - DEC-004
 tags: [decisions, history]
 ```
 
@@ -152,3 +153,26 @@ updated_at: 2026-06-08
 ```
 
 MDBind installation for this project is `pip install mdbind`.
+
+### DEC-004 - Require PO-approved specification before implementation
+
+```yaml
+section: decisions.DEC-004
+id: DEC-004
+title: Require PO-approved specification before implementation
+date: 2026-06-08
+status: approved
+context: The PO clarified that implementation must not start before the scope is specified and approved.
+decision: Add a constitutional rule requiring PO-approved specification before implementation and keep scrum records concise.
+impact: B-001 now targets documentation gaps only, and SPR-2026-01 is obsolete.
+affected_files:
+  - scrum/CONSTITUTION.md
+  - scrum/backlog.md
+  - scrum/backlog/B-001.md
+  - scrum/sprints.md
+  - scrum/sprints/SPR-2026-01.md
+future_review: Apply this rule before creating the first implementation sprint.
+owner: Guilherme
+created_at: 2026-06-08
+updated_at: 2026-06-08
+```
