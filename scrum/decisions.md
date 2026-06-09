@@ -6,7 +6,7 @@ title: Decision Memory
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-08
+updated_at: 2026-06-09
 type: governance_memory
 scope: memory_architecture_and_process_governance
 tags: [decisions, governance, memory]
@@ -72,12 +72,13 @@ title: Decision History
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-08
+updated_at: 2026-06-09
 decisions:
   - DEC-001
   - DEC-002
   - DEC-003
   - DEC-004
+  - DEC-005
 tags: [decisions, history]
 ```
 
@@ -175,4 +176,28 @@ future_review: Apply this rule before creating the first implementation sprint.
 owner: Guilherme
 created_at: 2026-06-08
 updated_at: 2026-06-08
+```
+
+### DEC-005 - Use Python Typer and direct MDBind library integration
+
+```yaml
+section: decisions.DEC-005
+id: DEC-005
+title: Use Python Typer and direct MDBind library integration
+date: 2026-06-09
+status: approved
+context: The PO approved the implementation foundation after SPR-2026-02 closed and clarified that the first implementation backlog items should focus on Jinja2 template generation.
+decision: Build `smd` with Python and Typer, render memory files with Jinja2 templates, and integrate MDBind directly as a Python library instead of shelling out to the `mdb` command for core validation.
+impact: The foundation backlog starts with template rendering, then CLI/config/JSON plumbing, then memory repository and MDBind library primitives.
+affected_files:
+  - scrum/backlog.md
+  - scrum/backlog/B-002.md
+  - scrum/backlog/B-003.md
+  - scrum/backlog/B-004.md
+  - scrum/architecture.md
+  - scrum/decisions.md
+future_review: Revisit once B-004 validates whether the public MDBind Python APIs are stable enough for direct integration.
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
 ```
