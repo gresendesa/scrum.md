@@ -69,6 +69,7 @@ updated_at: 2026-06-09
 sprints:
   - SPR-2026-01
   - SPR-2026-02
+  - SPR-2026-03
 tags: [sprints, registry]
 ```
 
@@ -108,6 +109,24 @@ updated_at: 2026-06-09
 ```
 
 [@ref: Detailed sprint](sprints/SPR-2026-02.md#sprint.SPR-2026-02)
+
+### SPR-2026-03 - Agent-operable foundation
+
+```yaml
+section: sprints.SPR-2026-03
+sprint_id: SPR-2026-03
+title: Agent-operable foundation
+status: done
+focus: Build Jinja2 templates and memory primitives that let agents operate Scrum memory deterministically.
+po_priority_summary: B-002 priority 1 critical; B-003 priority 1 critical; B-004 priority 2 high deferred.
+sprint_risk: medium
+detail_file: scrum/sprints/SPR-2026-03.md
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
+```
+
+[@ref: Detailed sprint](sprints/SPR-2026-03.md#sprint.SPR-2026-03)
 
 ### SPR-YYYY-NN Template
 

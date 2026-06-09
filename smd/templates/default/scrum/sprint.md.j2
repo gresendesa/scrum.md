@@ -1,0 +1,30 @@
+# {{ sprint_id }} - {{ title }}
+
+```yaml
+section: sprint.{{ sprint_id }}
+sprint_id: {{ sprint_id }}
+title: {{ title }}
+status: {{ status | default("planned") }}
+focus: {{ focus }}
+sprint_risk: {{ sprint_risk | default("medium") }}
+owner: {{ owner }}
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
+backlog_items:
+{% for item_id in backlog_items %}
+  - {{ item_id }}
+{% endfor %}
+tags: [sprint, planning, smd]
+```
+
+## Goal
+
+```yaml
+section: sprint.{{ sprint_id }}.goal
+title: Sprint Goal
+status: active
+owner: {{ owner }}
+tags: [goal]
+```
+
+{{ goal }}

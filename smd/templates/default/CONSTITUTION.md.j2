@@ -1,0 +1,98 @@
+# Constitution - {{ project_name }}
+
+```yaml
+section: constitution
+title: Constitution
+project_name: {{ project_name }}
+version: 1.0
+status: active
+owner: {{ owner }}
+official_language: {{ language }}
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
+tags: [governance, constitution, memory, scrum, mdbind]
+```
+
+This document defines the operating constitution for `{{ project_name }}`.
+
+## Memory Policy
+
+```yaml
+section: constitution.memory-policy
+title: Memory Policy
+status: active
+owner: {{ owner }}
+tags: [memory, governance]
+```
+
+* Official memory lives under `{{ memory_root }}/`.
+* Consolidators stay concise.
+* Detail records preserve scope, criteria, dependencies, and history.
+
+## Record Standard
+
+```yaml
+section: constitution.record-standard
+title: Record Standard
+status: active
+owner: {{ owner }}
+tags: [records, statuses, governance]
+```
+
+Records must have stable `section` values, explicit status, owner, and dates.
+
+### Default Statuses
+
+```yaml
+section: constitution.record-standard.statuses
+title: Default Statuses
+status: active
+owner: {{ owner }}
+allowed_statuses:
+  - todo
+  - refined
+  - planned
+  - doing
+  - blocked
+  - review
+  - done
+  - cancelled
+  - obsolete
+tags: [records, statuses]
+```
+
+## Agent Memory Management
+
+```yaml
+section: constitution.agent-memory-management
+title: Agent Memory Management
+status: active
+owner: {{ owner }}
+tags: [agent, memory, governance]
+```
+
+Agents must query and validate memory before changing execution state.
+
+### Backlog
+
+```yaml
+section: constitution.agent-memory-management.backlog
+title: Backlog Memory Rule
+status: active
+owner: {{ owner }}
+tags: [backlog, memory]
+```
+
+`{{ memory_root }}/backlog.md` indexes backlog detail files.
+
+### Sprints
+
+```yaml
+section: constitution.agent-memory-management.sprints
+title: Sprint Memory Rule
+status: active
+owner: {{ owner }}
+tags: [sprints, memory]
+```
+
+`{{ memory_root }}/sprints.md` indexes sprint detail files.

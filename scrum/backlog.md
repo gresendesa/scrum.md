@@ -90,6 +90,8 @@ updated_at: 2026-06-08
 item_status: done
 items:
   - B-001
+  - B-002
+  - B-003
 tags: [backlog, done]
 ```
 
@@ -112,6 +114,44 @@ updated_at: 2026-06-09
 [@ref: Detailed backlog item](backlog/B-001.md#backlog.item.B-001)
 [@ref: Closed sprint](sprints/SPR-2026-02.md#sprint.SPR-2026-02)
 
+#### B-002 - Build agent-operable Jinja2 templates
+
+```yaml
+section: backlog.synthetic-summary.done.B-002
+id: B-002
+title: Build agent-operable Jinja2 templates
+status: done
+po_priority: 1
+risk: medium
+linked_sprint: SPR-2026-03
+detail_file: scrum/backlog/B-002.md
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
+```
+
+[@ref: Detailed backlog item](backlog/B-002.md#backlog.item.B-002)
+[@ref: Closed sprint](sprints/SPR-2026-03.md#sprint.SPR-2026-03)
+
+#### B-003 - Build memory repository and MDBind foundation
+
+```yaml
+section: backlog.synthetic-summary.done.B-003
+id: B-003
+title: Build memory repository and MDBind foundation
+status: done
+po_priority: 1
+risk: medium
+linked_sprint: SPR-2026-03
+detail_file: scrum/backlog/B-003.md
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
+```
+
+[@ref: Detailed backlog item](backlog/B-003.md#backlog.item.B-003)
+[@ref: Closed sprint](sprints/SPR-2026-03.md#sprint.SPR-2026-03)
+
 ### Pending
 
 ```yaml
@@ -123,49 +163,9 @@ created_at: 2026-06-08
 updated_at: 2026-06-09
 item_status: todo
 items:
-  - B-002
-  - B-003
   - B-004
 tags: [backlog, pending]
 ```
-
-#### B-002 - Build agent-operable Jinja2 templates
-
-```yaml
-section: backlog.synthetic-summary.pending.B-002
-id: B-002
-title: Build agent-operable Jinja2 templates
-status: todo
-po_priority:
-risk: medium
-linked_sprint:
-detail_file: scrum/backlog/B-002.md
-owner: Guilherme
-created_at: 2026-06-09
-updated_at: 2026-06-09
-```
-
-[@ref: Detailed backlog item](backlog/B-002.md#backlog.item.B-002)
-[@ref: Template specification](../specification.md#specification.templates)
-
-#### B-003 - Build memory repository and MDBind foundation
-
-```yaml
-section: backlog.synthetic-summary.pending.B-003
-id: B-003
-title: Build memory repository and MDBind foundation
-status: todo
-po_priority:
-risk: medium
-linked_sprint:
-detail_file: scrum/backlog/B-003.md
-owner: Guilherme
-created_at: 2026-06-09
-updated_at: 2026-06-09
-```
-
-[@ref: Detailed backlog item](backlog/B-003.md#backlog.item.B-003)
-[@ref: MDBind integration](../specification.md#specification.mdbind-integration)
 
 #### B-004 - Build Python CLI shell and JSON contract
 
@@ -174,7 +174,7 @@ section: backlog.synthetic-summary.pending.B-004
 id: B-004
 title: Build Python CLI shell and JSON contract
 status: todo
-po_priority:
+po_priority: 2
 risk: medium
 linked_sprint:
 detail_file: scrum/backlog/B-004.md

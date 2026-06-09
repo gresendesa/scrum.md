@@ -1,0 +1,108 @@
+# Backlog Consolidator
+
+```yaml
+section: backlog
+title: Backlog Consolidator
+status: active
+owner: {{ owner }}
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
+type: consolidator
+scope: backlog
+detail_directory: {{ memory_root }}/backlog/
+tags: [backlog, scrum, memory, consolidator]
+```
+
+This file is the synthetic consolidator for backlog items.
+
+[@ref: Backlog memory rule](CONSTITUTION.md#constitution.agent-memory-management.backlog)
+
+## Synthetic Item Summary
+
+```yaml
+section: backlog.synthetic-summary
+title: Synthetic Item Summary
+status: active
+owner: {{ owner }}
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
+groups:
+  - done
+  - pending
+  - refined
+  - planned
+  - doing
+  - review
+tags: [summary, backlog]
+```
+
+### Pending
+
+```yaml
+section: backlog.synthetic-summary.pending
+title: Pending Backlog Items
+status: active
+owner: {{ owner }}
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
+item_status: todo
+items: []
+tags: [backlog, pending]
+```
+
+No items registered.
+
+### Planned
+
+```yaml
+section: backlog.synthetic-summary.planned
+title: Planned Backlog Items
+status: active
+owner: {{ owner }}
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
+item_status: planned
+items: []
+tags: [backlog, planned]
+```
+
+No items registered.
+
+### Doing
+
+```yaml
+section: backlog.synthetic-summary.doing
+title: Backlog Items In Progress
+status: active
+owner: {{ owner }}
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
+item_status: doing
+items: []
+tags: [backlog, doing]
+```
+
+No items registered.
+
+## Synthetic Template
+
+```yaml
+section: backlog.template.synthetic-item
+title: Synthetic Template for New Backlog Items
+status: active
+owner: {{ owner }}
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
+allowed_statuses:
+  - todo
+  - refined
+  - planned
+  - doing
+  - blocked
+  - review
+  - done
+  - obsolete
+tags: [template, backlog]
+```
+
+[@ref: Default statuses](CONSTITUTION.md#constitution.record-standard.statuses)

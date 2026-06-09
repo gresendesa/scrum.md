@@ -1,0 +1,17 @@
+# {{ decision_id }} - {{ title }}
+
+```yaml
+section: decisions.{{ decision_id }}
+id: {{ decision_id }}
+title: {{ title }}
+date: {{ date }}
+status: {{ status | default("approved") }}
+context: {{ context }}
+decision: {{ decision }}
+impact: {{ impact }}
+affected_files: []
+future_review:
+owner: {{ owner }}
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
+```

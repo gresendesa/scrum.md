@@ -6,7 +6,7 @@ memory_root: scrum
 entrypoint: AGENTS.md
 
 commands:
-  test:
+  test: ".venv/bin/python -m unittest discover -v"
   build:
   lint:
 

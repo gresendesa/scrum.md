@@ -1,0 +1,42 @@
+# {{ item_id }} - {{ title }}
+
+```yaml
+section: backlog.item.{{ item_id }}
+id: {{ item_id }}
+title: {{ title }}
+status: {{ status | default("todo") }}
+type: {{ type | default("implementation") }}
+po_priority: {{ po_priority | default("null") }}
+risk: {{ risk | default("medium") }}
+linked_sprint: {{ linked_sprint | default("null") }}
+owner: {{ owner }}
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
+tags: [backlog, {{ type | default("implementation") }}, smd]
+```
+
+## Objective
+
+```yaml
+section: backlog.item.{{ item_id }}.objective
+title: Objective
+status: active
+owner: {{ owner }}
+tags: [objective]
+```
+
+{{ objective }}
+
+## Acceptance Criteria
+
+```yaml
+section: backlog.item.{{ item_id }}.acceptance-criteria
+title: Acceptance Criteria
+status: active
+owner: {{ owner }}
+criteria:
+{% for criterion in criteria %}
+  - {{ criterion }}
+{% endfor %}
+tags: [acceptance]
+```

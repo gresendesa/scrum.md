@@ -91,12 +91,13 @@ status: active
 owner: Guilherme
 created_at: 2026-06-08
 updated_at: 2026-06-09
-questions:
-  - What test command should become the default in .smd/config.yml for this repository?
+questions: []
+resolved:
+  test_command: ".venv/bin/python -m unittest discover -v"
 tags: [questions, architecture]
 ```
 
-These questions should be answered during sprint planning or early implementation.
+The implementation foundation uses `unittest` as the default local test command.
 
 ## Implementation Baseline
 

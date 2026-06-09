@@ -1,0 +1,19 @@
+# {{ experience_id }} - {{ title }}
+
+```yaml
+section: experience.{{ experience_id }}
+id: {{ experience_id }}
+title: {{ title }}
+date: {{ date }}
+context: {{ context }}
+problem: {{ problem }}
+impact: {{ impact }}
+root_cause: {{ root_cause }}
+corrective_action: {{ corrective_action }}
+preventive_action: {{ preventive_action }}
+status: {{ status | default("open") }}
+owner: {{ owner }}
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
+tags: [experience]
+```

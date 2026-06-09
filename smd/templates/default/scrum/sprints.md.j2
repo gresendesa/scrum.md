@@ -1,0 +1,47 @@
+# Sprints Consolidator
+
+```yaml
+section: sprints
+title: Sprints Consolidator
+status: active
+owner: {{ owner }}
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
+type: consolidator
+scope: sprints
+detail_directory: {{ memory_root }}/sprints/
+tags: [sprints, scrum, memory, consolidator]
+```
+
+This file is the synthetic consolidator for project sprints.
+
+[@ref: Sprint memory rule](CONSTITUTION.md#constitution.agent-memory-management.sprints)
+
+## Registered Sprints
+
+```yaml
+section: sprints.registered
+title: Registered Sprints
+status: active
+owner: {{ owner }}
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
+sprints: []
+tags: [sprints, registry]
+```
+
+No concrete sprints registered yet.
+
+## Sprint Template
+
+```yaml
+section: sprints.template.SPR-YYYY-NN
+title: Sprint Template
+status: template
+owner: {{ owner }}
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
+sprint_id: SPR-YYYY-NN
+detail_file: {{ memory_root }}/sprints/SPR-YYYY-NN.md
+tags: [sprints, template]
+```

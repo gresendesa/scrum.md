@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scrum-md"
+version = "0.1.0"
+description = "Machine-first Scrum memory orchestration foundation."
+requires-python = ">=3.11"
+dependencies = [
+  "Jinja2>=3.1",
+  "mdbind>=0.1.6",
+  "PyYAML>=6.0",
+  "typer>=0.26",
+]
+
+[project.scripts]
+smd = "smd.cli:app"
+
+[tool.setuptools.packages.find]
+include = ["smd*"]
+
+[tool.setuptools.package-data]
+smd = ["templates/**/*.j2"]
