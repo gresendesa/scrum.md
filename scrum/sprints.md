@@ -6,7 +6,7 @@ title: Sprints Consolidator
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-08
+updated_at: 2026-06-09
 type: consolidator
 scope: sprints
 detail_directory: scrum/sprints/
@@ -65,7 +65,7 @@ title: Registered Sprints
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-08
+updated_at: 2026-06-09
 sprints:
   - SPR-2026-01
   - SPR-2026-02
@@ -97,14 +97,14 @@ obsolete_reason: PO clarified that Sprint 01 should not frame implementation wor
 section: sprints.SPR-2026-02
 sprint_id: SPR-2026-02
 title: Close documentation gaps
-status: review
+status: done
 focus: Review and update essential project documentation before implementation.
 po_priority_summary: B-001 priority 1 critical.
 sprint_risk: medium
 detail_file: scrum/sprints/SPR-2026-02.md
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-08
+updated_at: 2026-06-09
 ```
 
 [@ref: Detailed sprint](sprints/SPR-2026-02.md#sprint.SPR-2026-02)

@@ -79,5 +79,23 @@ records: []
 tags: [experience, records]
 ```
 
-No experience records registered yet.
+### EXP-001 - Keep sprint execution inside approved scope
 
+```yaml
+section: experience.EXP-001
+id: EXP-001
+date: 2026-06-09
+context: During SPR-2026-02 closure, the PO corrected the agent after it interpreted approval as permission to start CLI source code implementation.
+problem: The agent almost crossed from documentation-only sprint execution into implementation work.
+impact: Without the correction, the sprint scope and constitutional implementation gate could have been violated.
+root_cause: The approval phrase was interpreted too broadly instead of being reconciled against the active sprint scope.
+corrective_action: Keep SPR-2026-02 documentation-only, update B-001 and sprint closure records, and defer all CLI source code implementation to a future approved implementation sprint.
+preventive_action: Before implementation work, always inspect the active sprint scope and backlog item out-of-scope fields, even when the PO gives a short approval.
+status: resolved
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
+tags: [experience, scope, sprint, prevention]
+```
+
+This process learning applies to future implementation approvals.

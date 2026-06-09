@@ -6,7 +6,7 @@ title: Backlog Consolidator
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-08
+updated_at: 2026-06-09
 type: consolidator
 scope: backlog
 detail_directory: scrum/backlog/
@@ -65,13 +65,14 @@ title: Synthetic Item Summary
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-08
+updated_at: 2026-06-09
 groups:
   - done
   - pending
   - refined
   - planned
   - doing
+  - review
 tags: [summary, backlog]
 ```
 
@@ -87,11 +88,29 @@ owner: Guilherme
 created_at: 2026-06-08
 updated_at: 2026-06-08
 item_status: done
-items: []
+items:
+  - B-001
 tags: [backlog, done]
 ```
 
-No items registered.
+#### B-001 - Close documentation gaps before implementation
+
+```yaml
+section: backlog.synthetic-summary.done.B-001
+id: B-001
+title: Close documentation gaps before implementation
+status: done
+po_priority: 1
+risk: medium
+linked_sprint: SPR-2026-02
+detail_file: scrum/backlog/B-001.md
+owner: Guilherme
+created_at: 2026-06-08
+updated_at: 2026-06-09
+```
+
+[@ref: Detailed backlog item](backlog/B-001.md#backlog.item.B-001)
+[@ref: Closed sprint](sprints/SPR-2026-02.md#sprint.SPR-2026-02)
 
 ### Pending
 
@@ -149,31 +168,29 @@ title: Backlog Items In Progress
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-08
+updated_at: 2026-06-09
 item_status: doing
-items:
-  - B-001
+items: []
 tags: [backlog, doing]
 ```
 
-#### B-001 - Close documentation gaps before implementation
+No items registered.
+
+### Review
 
 ```yaml
-section: backlog.synthetic-summary.doing.B-001
-id: B-001
-title: Close documentation gaps before implementation
-status: doing
-po_priority: 1
-risk: medium
-linked_sprint: SPR-2026-02
-detail_file: scrum/backlog/B-001.md
+section: backlog.synthetic-summary.review
+title: Backlog Items In Review
+status: active
 owner: Guilherme
-created_at: 2026-06-08
-updated_at: 2026-06-08
+created_at: 2026-06-09
+updated_at: 2026-06-09
+item_status: review
+items: []
+tags: [backlog, review]
 ```
 
-[@ref: Detailed backlog item](backlog/B-001.md#backlog.item.B-001)
-[@ref: Planned sprint](sprints/SPR-2026-02.md#sprint.SPR-2026-02)
+No items registered.
 
 ## Synthetic Template for New Items
 
@@ -183,7 +200,7 @@ title: Synthetic Template for New Backlog Items
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-08
+updated_at: 2026-06-09
 template_fields:
   - id
   - title
@@ -197,6 +214,7 @@ allowed_statuses:
   - planned
   - doing
   - blocked
+  - review
   - done
   - obsolete
 tags: [template, backlog]
