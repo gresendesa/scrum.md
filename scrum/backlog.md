@@ -86,7 +86,7 @@ title: Done Backlog Items
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-08
+updated_at: 2026-06-10
 item_status: done
 items:
   - B-001
@@ -96,6 +96,7 @@ items:
   - B-006
   - B-007
   - B-008
+  - B-009
 tags: [backlog, done]
 ```
 
@@ -234,6 +235,25 @@ updated_at: 2026-06-10
 [@ref: Closed sprint](sprints/SPR-2026-07.md#sprint.SPR-2026-07)
 [@ref: Package command backlog item](backlog/B-006.md#backlog.item.B-006)
 
+#### B-009 - Create project README.md for PyPI publication
+
+```yaml
+section: backlog.synthetic-summary.done.B-009
+id: B-009
+title: Create project README.md for PyPI publication
+status: done
+po_priority: 2
+risk: low
+linked_sprint: SPR-2026-08
+detail_file: scrum/backlog/B-009.md
+owner: Guilherme
+created_at: 2026-06-10
+updated_at: 2026-06-10
+```
+
+[@ref: Detailed backlog item](backlog/B-009.md#backlog.item.B-009)
+[@ref: Closed sprint](sprints/SPR-2026-08.md#sprint.SPR-2026-08)
+
 ### Pending
 
 ```yaml
@@ -326,29 +346,11 @@ owner: Guilherme
 created_at: 2026-06-09
 updated_at: 2026-06-10
 item_status: review
-items:
-  - B-009
+items: []
 tags: [backlog, review]
 ```
 
-#### B-009 - Create project README.md for PyPI publication
-
-```yaml
-section: backlog.synthetic-summary.review.B-009
-id: B-009
-title: Create project README.md for PyPI publication
-status: review
-po_priority: 2
-risk: low
-linked_sprint: SPR-2026-08
-detail_file: scrum/backlog/B-009.md
-owner: Guilherme
-created_at: 2026-06-10
-updated_at: 2026-06-10
-```
-
-[@ref: Detailed backlog item](backlog/B-009.md#backlog.item.B-009)
-[@ref: Active sprint](sprints/SPR-2026-08.md#sprint.SPR-2026-08)
+No items registered.
 
 ## Synthetic Template for New Items
 

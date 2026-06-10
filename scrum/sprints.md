@@ -211,7 +211,7 @@ updated_at: 2026-06-10
 section: sprints.SPR-2026-08
 sprint_id: SPR-2026-08
 title: PyPI publication readiness and README.md
-status: review
+status: done
 focus: Create a PyPI-compatible README.md in the project root with appropriate badges, command table, and licensing information.
 po_priority_summary: B-009 priority 2 high; B-005 priority 4 low deferred.
 sprint_risk: low
