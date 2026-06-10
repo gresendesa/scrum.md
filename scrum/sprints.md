@@ -135,8 +135,8 @@ updated_at: 2026-06-09
 section: sprints.SPR-2026-04
 sprint_id: SPR-2026-04
 title: Python CLI shell and JSON contract
-status: planned
-focus: Expose the implemented memory foundation through the `smd` Typer CLI shell and stable JSON envelope.
+status: done
+focus: Expose the memory foundation through the `smd` Typer CLI shell, stable JSON envelope, and local template zip package rendering.
 po_priority_summary: B-004 priority 2 high; B-005 priority 4 low deferred.
 sprint_risk: medium
 detail_file: scrum/sprints/SPR-2026-04.md

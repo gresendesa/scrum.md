@@ -92,6 +92,7 @@ items:
   - B-001
   - B-002
   - B-003
+  - B-004
 tags: [backlog, done]
 ```
 
@@ -152,6 +153,25 @@ updated_at: 2026-06-09
 [@ref: Detailed backlog item](backlog/B-003.md#backlog.item.B-003)
 [@ref: Closed sprint](sprints/SPR-2026-03.md#sprint.SPR-2026-03)
 
+#### B-004 - Build Python CLI shell and JSON contract
+
+```yaml
+section: backlog.synthetic-summary.done.B-004
+id: B-004
+title: Build Python CLI shell and JSON contract
+status: done
+po_priority: 2
+risk: medium
+linked_sprint: SPR-2026-04
+detail_file: scrum/backlog/B-004.md
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
+```
+
+[@ref: Detailed backlog item](backlog/B-004.md#backlog.item.B-004)
+[@ref: Closed sprint](sprints/SPR-2026-04.md#sprint.SPR-2026-04)
+
 ### Pending
 
 ```yaml
@@ -164,6 +184,8 @@ updated_at: 2026-06-09
 item_status: todo
 items:
   - B-005
+  - B-006
+  - B-007
 tags: [backlog, pending]
 ```
 
@@ -185,6 +207,44 @@ updated_at: 2026-06-09
 
 [@ref: Detailed backlog item](backlog/B-005.md#backlog.item.B-005)
 [@ref: AI workflow](../specification.md#specification.ai-workflow)
+
+#### B-006 - Add smd pack command for signed template packages
+
+```yaml
+section: backlog.synthetic-summary.pending.B-006
+id: B-006
+title: Add smd pack command for signed template packages
+status: todo
+po_priority: 2
+risk: medium
+linked_sprint:
+detail_file: scrum/backlog/B-006.md
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
+```
+
+[@ref: Detailed backlog item](backlog/B-006.md#backlog.item.B-006)
+[@ref: Template package decision](decisions.md#decisions.DEC-006)
+
+#### B-007 - Implement smd init from signed template packages
+
+```yaml
+section: backlog.synthetic-summary.pending.B-007
+id: B-007
+title: Implement smd init from signed template packages
+status: todo
+po_priority:
+risk: medium
+linked_sprint:
+detail_file: scrum/backlog/B-007.md
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
+```
+
+[@ref: Detailed backlog item](backlog/B-007.md#backlog.item.B-007)
+[@ref: Package command backlog item](backlog/B-006.md#backlog.item.B-006)
 
 ### Refined
 
@@ -212,29 +272,11 @@ owner: Guilherme
 created_at: 2026-06-08
 updated_at: 2026-06-08
 item_status: planned
-items:
-  - B-004
+items: []
 tags: [backlog, planned]
 ```
 
-#### B-004 - Build Python CLI shell and JSON contract
-
-```yaml
-section: backlog.synthetic-summary.planned.B-004
-id: B-004
-title: Build Python CLI shell and JSON contract
-status: planned
-po_priority: 2
-risk: medium
-linked_sprint: SPR-2026-04
-detail_file: scrum/backlog/B-004.md
-owner: Guilherme
-created_at: 2026-06-09
-updated_at: 2026-06-09
-```
-
-[@ref: Detailed backlog item](backlog/B-004.md#backlog.item.B-004)
-[@ref: Planned sprint](sprints/SPR-2026-04.md#sprint.SPR-2026-04)
+No items registered.
 
 ### Doing
 
