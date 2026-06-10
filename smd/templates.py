@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -24,8 +25,6 @@ class RenderedFile:
 DEFAULT_CONTEXT: dict[str, Any] = {
     "project_name": "scrum.md",
     "owner": "Guilherme",
-    "created_at": "2026-06-09",
-    "updated_at": "2026-06-09",
     "language": "en",
     "memory_root": "scrum",
     "template_profile": "standard",
@@ -86,11 +85,18 @@ def render_template(name: str, context: dict[str, Any]) -> str:
 def render_project_memory(context: dict[str, Any] | None = None) -> list[RenderedFile]:
     """Render the base Scrum memory files for a project."""
 
-    data = {**DEFAULT_CONTEXT, **(context or {})}
+    data = {**default_context(), **(context or {})}
     files: list[RenderedFile] = []
     for template_name, target in BASE_TEMPLATES:
         files.append(RenderedFile(Path(target), render_template(template_name, data)))
     return files
+
+
+def default_context() -> dict[str, Any]:
+    """Build default template values that depend on render time."""
+
+    today = date.today().isoformat()
+    return {**DEFAULT_CONTEXT, "created_at": today, "updated_at": today}
 
 
 def write_rendered_files(project_root: Path, files: list[RenderedFile]) -> None:

@@ -95,6 +95,7 @@ items:
   - B-004
   - B-006
   - B-007
+  - B-008
 tags: [backlog, done]
 ```
 
@@ -213,6 +214,26 @@ updated_at: 2026-06-10
 [@ref: Closed sprint](sprints/SPR-2026-06.md#sprint.SPR-2026-06)
 [@ref: Package command backlog item](backlog/B-006.md#backlog.item.B-006)
 
+#### B-008 - Move template governance files under scrum
+
+```yaml
+section: backlog.synthetic-summary.done.B-008
+id: B-008
+title: Move template governance files under scrum
+status: done
+po_priority: 2
+risk: low
+linked_sprint: SPR-2026-07
+detail_file: scrum/backlog/B-008.md
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-10
+```
+
+[@ref: Detailed backlog item](backlog/B-008.md#backlog.item.B-008)
+[@ref: Closed sprint](sprints/SPR-2026-07.md#sprint.SPR-2026-07)
+[@ref: Package command backlog item](backlog/B-006.md#backlog.item.B-006)
+
 ### Pending
 
 ```yaml
@@ -225,7 +246,6 @@ updated_at: 2026-06-09
 item_status: todo
 items:
   - B-005
-  - B-008
 tags: [backlog, pending]
 ```
 
@@ -247,25 +267,6 @@ updated_at: 2026-06-09
 
 [@ref: Detailed backlog item](backlog/B-005.md#backlog.item.B-005)
 [@ref: AI workflow](../specification.md#specification.ai-workflow)
-
-#### B-008 - Move template governance files under scrum
-
-```yaml
-section: backlog.synthetic-summary.pending.B-008
-id: B-008
-title: Move template governance files under scrum
-status: todo
-po_priority: 2
-risk: low
-linked_sprint:
-detail_file: scrum/backlog/B-008.md
-owner: Guilherme
-created_at: 2026-06-09
-updated_at: 2026-06-09
-```
-
-[@ref: Detailed backlog item](backlog/B-008.md#backlog.item.B-008)
-[@ref: Package command backlog item](backlog/B-006.md#backlog.item.B-006)
 
 ### Refined
 
@@ -291,7 +292,7 @@ title: Planned Backlog Items
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-09
+updated_at: 2026-06-10
 item_status: planned
 items: []
 tags: [backlog, planned]
@@ -307,7 +308,7 @@ title: Backlog Items In Progress
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-09
+updated_at: 2026-06-10
 item_status: doing
 items: []
 tags: [backlog, doing]
@@ -323,7 +324,7 @@ title: Backlog Items In Review
 status: active
 owner: Guilherme
 created_at: 2026-06-09
-updated_at: 2026-06-09
+updated_at: 2026-06-10
 item_status: review
 items: []
 tags: [backlog, review]

@@ -73,6 +73,7 @@ sprints:
   - SPR-2026-04
   - SPR-2026-05
   - SPR-2026-06
+  - SPR-2026-07
 tags: [sprints, registry]
 ```
 
@@ -184,6 +185,24 @@ updated_at: 2026-06-09
 ```
 
 [@ref: Detailed sprint](sprints/SPR-2026-06.md#sprint.SPR-2026-06)
+
+### SPR-2026-07 - Move default template governance under scrum
+
+```yaml
+section: sprints.SPR-2026-07
+sprint_id: SPR-2026-07
+title: Move default template governance under scrum
+status: done
+focus: Move the default template governance files into `templates/default/scrum/` and keep package initialization, packing, and validation behavior intact.
+po_priority_summary: B-008 priority 2 high; B-005 priority 4 low deferred.
+sprint_risk: low
+detail_file: scrum/sprints/SPR-2026-07.md
+owner: Guilherme
+created_at: 2026-06-10
+updated_at: 2026-06-10
+```
+
+[@ref: Detailed sprint](sprints/SPR-2026-07.md#sprint.SPR-2026-07)
 
 ### SPR-YYYY-NN Template
 

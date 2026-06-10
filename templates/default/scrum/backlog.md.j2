@@ -5,8 +5,8 @@ section: backlog
 title: Backlog Consolidator
 status: active
 owner: "{{ owner }}"
-created_at: 2026-04-08
-updated_at:
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
 type: consolidator
 scope: backlog
 detail_directory: scrum/backlog/
@@ -29,8 +29,8 @@ section: backlog.objective
 title: Backlog Objective
 status: active
 owner: "{{ owner }}"
-created_at: 2026-04-08
-updated_at:
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
 tags: [objective, backlog]
 ```
 
@@ -45,8 +45,8 @@ section: backlog.convention
 title: Backlog Convention
 status: active
 owner: "{{ owner }}"
-created_at: 2026-04-08
-updated_at:
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
 item_id_format: B-XXX
 detail_file_pattern: scrum/backlog/B-XXX.md
 tags: [convention, backlog, ids]
@@ -64,8 +64,8 @@ section: backlog.synthetic-summary
 title: Synthetic Item Summary
 status: active
 owner: "{{ owner }}"
-created_at: 2026-04-08
-updated_at:
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
 groups:
   - done
   - pending
@@ -83,8 +83,8 @@ section: backlog.synthetic-summary.done
 title: Done Backlog Items
 status: active
 owner: "{{ owner }}"
-created_at: 2026-04-08
-updated_at:
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
 item_status: done
 items: []
 tags: [backlog, done]
@@ -99,8 +99,8 @@ section: backlog.synthetic-summary.pending
 title: Pending Backlog Items
 status: active
 owner: "{{ owner }}"
-created_at: 2026-04-08
-updated_at:
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
 item_status: pending
 items: []
 tags: [backlog, pending]
@@ -115,8 +115,8 @@ section: backlog.synthetic-summary.planned
 title: Planned Backlog Items
 status: active
 owner: "{{ owner }}"
-created_at: 2026-04-08
-updated_at:
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
 item_status: planned
 items: []
 tags: [backlog, planned]
@@ -131,8 +131,8 @@ section: backlog.synthetic-summary.doing
 title: Backlog Items In Progress
 status: active
 owner: "{{ owner }}"
-created_at: 2026-04-08
-updated_at:
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
 item_status: doing
 items: []
 tags: [backlog, doing]
@@ -147,8 +147,8 @@ section: backlog.template.synthetic-item
 title: Synthetic Template for New Backlog Items
 status: active
 owner: "{{ owner }}"
-created_at: 2026-04-08
-updated_at:
+created_at: {{ created_at }}
+updated_at: {{ updated_at }}
 template_fields:
   - id
   - title

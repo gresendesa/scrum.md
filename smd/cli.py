@@ -19,7 +19,7 @@ from smd.template_packages import (
     pack_template_package,
     render_template_package,
 )
-from smd.templates import DEFAULT_CONTEXT, TemplateRenderError
+from smd.templates import DEFAULT_CONTEXT, TemplateRenderError, default_context
 
 
 app = typer.Typer(
@@ -369,7 +369,7 @@ def _json_output(ctx: typer.Context) -> bool:
 def _template_context(ctx: typer.Context) -> dict[str, Any]:
     config = _config(ctx)
     return {
-        **DEFAULT_CONTEXT,
+        **default_context(),
         **{key: value for key, value in config.items() if not isinstance(value, dict)},
         "template_profile": config.get("templates", {}).get("profile", DEFAULT_CONTEXT["template_profile"]),
     }

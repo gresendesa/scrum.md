@@ -1,4 +1,5 @@
 import json
+from datetime import date
 from pathlib import Path
 import tempfile
 import unittest
@@ -150,6 +151,71 @@ class CliTests(unittest.TestCase):
                 signed_paths = [item["path"] for item in signature["files"]]
                 self.assertIn("manifest.yaml", signed_paths)
                 self.assertNotIn("SIGNATURE.yaml", signed_paths)
+
+    def test_default_template_package_uses_scrum_governance_layout(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = Path(__file__).resolve().parents[1] / "templates" / "default"
+            output = root / "default.zip"
+
+            result = self.runner.invoke(
+                app,
+                ["--root", str(root), "--json", "pack", str(source), "--output", str(output)],
+            )
+
+            self.assertEqual(result.exit_code, 0, result.output)
+            with ZipFile(output) as archive:
+                names = archive.namelist()
+                self.assertIn("scrum/CONSTITUTION.md.j2", names)
+                self.assertIn("scrum/instructions/LLM.md", names)
+                self.assertNotIn("CONSTITUTION.md.j2", names)
+                self.assertNotIn("instructions/LLM.md", names)
+                manifest = yaml.safe_load(archive.read("manifest.yaml").decode("utf-8"))
+                self.assertEqual(manifest["files"][0]["template"], "scrum/CONSTITUTION.md.j2")
+                self.assertEqual(manifest["files"][0]["target"], "scrum/CONSTITUTION.md")
+                self.assertEqual(manifest["instructions"], ["scrum/instructions/LLM.md"])
+
+    def test_default_template_init_uses_current_creation_date(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = Path(__file__).resolve().parents[1] / "templates" / "default"
+            output = root / "default.zip"
+            pack_result = self.runner.invoke(
+                app,
+                ["--root", str(root), "--json", "pack", str(source), "--output", str(output)],
+            )
+            self.assertEqual(pack_result.exit_code, 0, pack_result.output)
+            target = root / "target"
+
+            result = self.runner.invoke(
+                app,
+                [
+                    "--root",
+                    str(target),
+                    "--json",
+                    "init",
+                    "--template-package",
+                    str(output),
+                    "--project-name",
+                    "dated",
+                    "--owner",
+                    "Guilherme Ágil",
+                    "--purpose",
+                    "Date test",
+                ],
+            )
+
+            self.assertEqual(result.exit_code, 0, result.output)
+            today = date.today().isoformat()
+            constitution = (target / "scrum" / "CONSTITUTION.md").read_text(encoding="utf-8")
+            backlog = (target / "scrum" / "backlog.md").read_text(encoding="utf-8")
+            self.assertIn(f"created_at: {today}", constitution)
+            self.assertIn(f"updated_at: {today}", constitution)
+            self.assertIn(f"created_at: {today}", backlog)
+            self.assertIn('owner: "Guilherme Ágil"', constitution)
+            self.assertIn('owner: "Guilherme Ágil"', backlog)
+            self.assertNotIn("created_at: 2026-04-08", constitution)
+            self.assertNotIn("created_at: 2026-04-08", backlog)
 
     def test_pack_rejects_missing_input_directory(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -5,7 +5,7 @@ author: Scrum.md maintainers
 template_engine: jinja2
 smd_version: "0.1.0"
 instructions:
-  - instructions/LLM.md
+  - scrum/instructions/LLM.md
 variables:
   - name: project_name
     prompt: Project name
@@ -32,7 +32,7 @@ variables:
     default: standard
     required: true
 files:
-  - template: CONSTITUTION.md.j2
+  - template: scrum/CONSTITUTION.md.j2
     target: scrum/CONSTITUTION.md
   - template: scrum/backlog.md.j2
     target: scrum/backlog.md
