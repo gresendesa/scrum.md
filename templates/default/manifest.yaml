@@ -1,0 +1,33 @@
+name: smd-default
+version: "0.1.0"
+description: Default Scrum.md template package for AI-operated Scrum memory.
+author: Scrum.md maintainers
+template_engine: jinja2
+smd_version: "0.1.0"
+instructions:
+  - instructions/LLM.md
+files:
+  - template: CONSTITUTION.md.j2
+    target: scrum/CONSTITUTION.md
+  - template: scrum/backlog.md.j2
+    target: scrum/backlog.md
+  - template: scrum/sprints.md.j2
+    target: scrum/sprints.md
+  - template: scrum/decisions.md.j2
+    target: scrum/decisions.md
+  - template: scrum/experience.md.j2
+    target: scrum/experience.md
+  - template: scrum/architecture.md.j2
+    target: scrum/architecture.md
+compatibility:
+  manifest_version: "1"
+  signature_policy: checksum-only
+entrypoints:
+  base_memory:
+    - scrum/CONSTITUTION.md
+    - scrum/backlog.md
+    - scrum/sprints.md
+    - scrum/decisions.md
+    - scrum/experience.md
+    - scrum/architecture.md
+tags: [scrum, memory, ai, mdbind, default]

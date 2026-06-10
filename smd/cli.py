@@ -10,7 +10,7 @@ import typer
 from smd.config import load_config
 from smd.memory import MemoryRepository, ScrumRecord
 from smd.output import dumps, envelope
-from smd.template_packages import TemplatePackageError, render_template_package
+from smd.template_packages import TemplatePackageError, TemplatePackagePackError, pack_template_package, render_template_package
 from smd.templates import DEFAULT_CONTEXT, TemplateRenderError
 
 
@@ -101,6 +101,41 @@ def validate(ctx: typer.Context) -> None:
         errors=result.errors,
         human="Memory validation passed." if result.ok else "Memory validation failed.",
         exit_code=0 if result.ok else 1,
+    )
+
+
+@app.command()
+def pack(
+    ctx: typer.Context,
+    directory: Annotated[Path, typer.Argument(help="Local template package directory.")],
+    output: Annotated[
+        Path | None,
+        typer.Option("--output", "-o", dir_okay=False, resolve_path=True, help="Output .zip path."),
+    ] = None,
+    force: Annotated[bool, typer.Option("--force", help="Overwrite an existing output zip.")] = False,
+) -> None:
+    """Create a checksum-signed template package zip from a directory."""
+
+    root = _root(ctx)
+    source_dir = directory.resolve()
+    output_path = (output or (root / f"{source_dir.name}.zip")).resolve()
+    try:
+        result = pack_template_package(source_dir, output_path, force=force)
+    except TemplatePackagePackError as exc:
+        _fail(
+            ctx,
+            "PACK_FAILED",
+            str(exc),
+            command="smd pack",
+            suggestion="Fix the package directory, manifest.yaml, or output path.",
+        )
+
+    _emit(
+        ctx,
+        ok=True,
+        command="smd pack",
+        data=result,
+        human=f"Packed template package to {result.output}.",
     )
 
 

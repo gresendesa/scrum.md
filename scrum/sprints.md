@@ -71,6 +71,7 @@ sprints:
   - SPR-2026-02
   - SPR-2026-03
   - SPR-2026-04
+  - SPR-2026-05
 tags: [sprints, registry]
 ```
 
@@ -146,6 +147,24 @@ updated_at: 2026-06-09
 ```
 
 [@ref: Detailed sprint](sprints/SPR-2026-04.md#sprint.SPR-2026-04)
+
+### SPR-2026-05 - Signed template package packing
+
+```yaml
+section: sprints.SPR-2026-05
+sprint_id: SPR-2026-05
+title: Signed template package packing
+status: done
+focus: Implement `smd pack` for local checksum-signed template package creation with `manifest.yaml` declaration and `SIGNATURE.yaml` metadata.
+po_priority_summary: B-006 priority 2 high; B-005 priority 4 low deferred; B-007 deferred until B-006 is complete.
+sprint_risk: medium
+detail_file: scrum/sprints/SPR-2026-05.md
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
+```
+
+[@ref: Detailed sprint](sprints/SPR-2026-05.md#sprint.SPR-2026-05)
 
 ### SPR-YYYY-NN Template
 

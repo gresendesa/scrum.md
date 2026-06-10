@@ -93,6 +93,7 @@ items:
   - B-002
   - B-003
   - B-004
+  - B-006
 tags: [backlog, done]
 ```
 
@@ -172,6 +173,25 @@ updated_at: 2026-06-09
 [@ref: Detailed backlog item](backlog/B-004.md#backlog.item.B-004)
 [@ref: Closed sprint](sprints/SPR-2026-04.md#sprint.SPR-2026-04)
 
+#### B-006 - Add smd pack command for checksum-signed template packages
+
+```yaml
+section: backlog.synthetic-summary.done.B-006
+id: B-006
+title: Add smd pack command for checksum-signed template packages
+status: done
+po_priority: 2
+risk: medium
+linked_sprint: SPR-2026-05
+detail_file: scrum/backlog/B-006.md
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
+```
+
+[@ref: Detailed backlog item](backlog/B-006.md#backlog.item.B-006)
+[@ref: Closed sprint](sprints/SPR-2026-05.md#sprint.SPR-2026-05)
+
 ### Pending
 
 ```yaml
@@ -184,7 +204,6 @@ updated_at: 2026-06-09
 item_status: todo
 items:
   - B-005
-  - B-006
   - B-007
 tags: [backlog, pending]
 ```
@@ -207,25 +226,6 @@ updated_at: 2026-06-09
 
 [@ref: Detailed backlog item](backlog/B-005.md#backlog.item.B-005)
 [@ref: AI workflow](../specification.md#specification.ai-workflow)
-
-#### B-006 - Add smd pack command for signed template packages
-
-```yaml
-section: backlog.synthetic-summary.pending.B-006
-id: B-006
-title: Add smd pack command for signed template packages
-status: todo
-po_priority: 2
-risk: medium
-linked_sprint:
-detail_file: scrum/backlog/B-006.md
-owner: Guilherme
-created_at: 2026-06-09
-updated_at: 2026-06-09
-```
-
-[@ref: Detailed backlog item](backlog/B-006.md#backlog.item.B-006)
-[@ref: Template package decision](decisions.md#decisions.DEC-006)
 
 #### B-007 - Implement smd init from signed template packages
 
