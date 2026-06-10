@@ -1,103 +1,182 @@
-# Scrum.md (smd CLI)
+<div align="center">
 
-[![PyPI version](https://img.shields.io/pypi/v/scrum-md.svg)](https://pypi.org/project/scrum-md/)
-[![Python Support](https://img.shields.io/pypi/pyversions/scrum-md.svg)](https://pypi.org/project/scrum-md/)
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![MDBind](https://img.shields.io/badge/MDBind-compliant-success.svg)](https://github.com/gresendesa/mdbind)
+# Scrum.md
 
-**Scrum.md** is a machine-first, human-approved Scrum memory orchestration engine and CLI (`smd`) designed to streamline AI-assisted software development. By modeling project memory as a deterministic document graph, it prevents AI context degradation and ensures strict methodological rigor.
+**Machine-first Scrum memory orchestration.**
 
----
+Transform your Scrum memory into a deterministic, auditable document graph —  
+without loose text, implicit decisions, or manual link checks.
 
-## 💡 The Problem It Resolves
+[![Python](https://img.shields.io/badge/python-3.11%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![Tests](https://img.shields.io/badge/tests-23%20passing-brightgreen?logo=pytest&logoColor=white)](#development)
+[![Version](https://img.shields.io/badge/version-0.1.0-informational)](#installation)
+[![License](https://img.shields.io/badge/License-Apache_2.0-lightgreen.svg)](https://opensource.org/licenses/Apache-2.0)
+[![PyPI](https://img.shields.io/pypi/v/scrum-md?logo=pypi&logoColor=white&color=orange)](https://pypi.org/project/scrum-md/)
 
-AI software developers and agents (like Claude, Gemini, or GPTs) are highly capable but face significant challenges as codebases scale:
-
-1. **Context Amnesia & Fragmentation:** In long sessions, LLMs lose track of business requirements, previous design decisions, task states, acceptance criteria, and historical pivots when context windows get saturated or when they must reconcile disjointed markdown files.
-2. **Structural Hallucination:** When editing free-form markdown logs, AI agents frequently duplicate IDs, invent task states, break link anchors, delete audit histories, or close tasks without meeting quality requirements.
-3. **Methodological Drift & Quality Decay:** AI agents tend to bypass standard development stages (implementing features without a plan, skipping test execution, ignoring the Definition of Done, or forgetting to log decisions) unless restricted by system-level constraints.
-4. **Developer/PO Fatigue:** Without automated governance, human developers must continuously babysit AI agents—manually verifying documentation integrity, fixing broken links, and policing workflow compliance.
-
-**Scrum.md** resolves these issues by acting as an **operational track (trilho operacional)** for AI agents. Instead of allowing agents to write arbitrary documentation, it forces them to interact with Scrum memory via the deterministic `smd` CLI.
+</div>
 
 ---
-
-## 🛠️ Installation
-
-You can install `scrum-md` via pip:
 
 ```bash
+# Install
 pip install scrum-md
-```
 
-To install it locally for development or customization:
+# Validate your scrum folder
+smd validate --root scrum/
 
-```bash
-git clone https://github.com/gresendesa/scrum.md.git
-cd scrum.md
-pip install -e .
-```
-
----
-
-## 🚀 How to Use
-
-`scrum-md` operates on a `scrum/` directory containing the project's living memory (backlog, sprints, decisions, architecture, and experiences) structured using the `mdbind` format.
-
-### 1. Initialize a Project
-Initialize a clean Scrum memory directory and configuration:
-```bash
-smd init --template-package templates/default.zip --project-name "MyAwesomeProject" --owner "PO Name"
-```
-
-### 2. Validate Project Memory
-Verify the entire Scrum memory graph, asserting that all IDs are unique, references/includes are intact, statuses are valid, and there are no cycles:
-```bash
-smd validate
-```
-
-### 3. Query the Active Sprint
-Retrieve details about the current sprint:
-```bash
+# Get the active sprint
 smd sprint active
 ```
 
-### 4. Query the Backlog
-List pending or refine backlog items:
+---
+
+## What is Scrum.md?
+
+Scrum.md is a **Scrum memory orchestration engine** designed for development environments driven by AI agents. It acts as an operational track (*trilho operacional*) to prevent AI context degradation and guarantee methodological rigor.
+
+By combining the **MdBind** notation with strict transition gates, it ensures:
+
+- Stable document IDs (`B-XXX` for backlog, `SPR-YYYY-NN` for sprints)
+- Automated verification of Definition of Done (DoD)
+- Traceability between backlog items, active sprints, decisions, and code
+- Structured context-composition for LLMs with bounded token consumption
+
+---
+
+## Why Scrum.md?
+
+| Issue | Free-text Markdown | Vector DBs / Embeddings | **Scrum.md (smd)** |
+|---|:---:|:---:|:---:|
+| **ID Uniqueness** | Hallucinates IDs | N/A | ✓ Guaranteed by CLI |
+| **Integrity Audit** | Manual check | ✗ Impossible | ✓ CLI Validate |
+| **History Retention** | Deletes/modifies | ✗ Impossible | ✓ Logged events |
+| **Quality Gates** | Ignored | ✗ N/A | ✓ Enforced gates |
+
+Every status, every backlog item, and every sprint is fully structured and verifiable. AI routines stay auditable, and the Product Owner remains in control.
+
+---
+
+## Quick start
+
 ```bash
-smd backlog list --pending
+# 1. Clone and install
+git clone <repo-url> && cd scrum.md
+python3 -m venv .venv && source .venv/bin/activate
+pip install -e .
+
+# 2. Package your templates
+smd pack templates/default --output default.zip
+
+# 3. Initialize Scrum memory in a target project
+smd init --template-package default.zip --project-name "MyProject" --owner "PO Name"
 ```
 
 ---
 
-## 📋 Commands Reference Table
+## See it in action
 
-The `smd` CLI provides the following command suite:
+```bash
+# Check if your Scrum memory has duplicate IDs or broken links
+$ smd validate --root scrum/
 
-| Command | Subcommand | Key Options | Description |
-| :--- | :--- | :--- | :--- |
-| **`init`** | — | `--template-package`, `--target`, `--force` | Initializes project Scrum memory (`scrum/`) from a signed template package. |
-| **`validate`** | — | `--root`, `--json` | Validates the entire Scrum memory graph for structural integrity, unique IDs, and valid state transitions. |
-| **`pack`** | — | `--output`, `--force` | Bundles templates from a directory into a secure, checksum-signed zip package. |
-| **`backlog`** | `list` | `--status`, `--pending` | Lists and filters backlog items (e.g., pending tasks, refined items) using structured queries. |
-| **`sprint`** | `active` | `--root` | Returns details of the currently active sprint. |
-| **`template`** | `render` | `--target`, `--project-name`, `--owner` | Renders boilerplate template files into a target directory. |
+# Retrieve the active sprint details
+$ smd sprint active --root scrum/
 
-*Global Options:* You can pass `--json` to any command to receive a structured, stable JSON envelope optimized for programmatic consumption by LLM agents.
+# Query backlog items that are pending (todo/refined)
+$ smd backlog list --pending --root scrum/
 
----
-
-## 🧠 Philosophy: Machine-First, Human-Approved
-
-Scrum.md is built around a unique collaboration model:
-
-* **Machine-First (AI Routine):** The AI agent (acting as Scrum Master and Developer) executes the operational routine. It queries the backlog, plans tasks, updates status, generates detail logs, registers design choices, writes code, runs tests, and validates the memory graph. It is banned from mutating state without validation.
-* **Human-Approved (PO Control):** The human Product Owner remains the supreme governor. The AI cannot close sprints, change core constitutional policies, or modify high-priority features without explicit, logged PO consent.
-* **Determinism over Free Text:** By utilizing `mdbind` annotations, documents become a verifiable graph database. Links and structural integrity are checked on every step.
+# Query backlog items filtered by status
+$ smd backlog list --status todo --root scrum/ --json
+```
 
 ---
 
-## 📄 License
+## Syntax & Directory Structure
 
-This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
+Scrum.md expects a standard memory layout under a designated `scrum/` folder:
+
+```
+scrum/
+├── CONSTITUTION.md   # Project rules, DoD, and transition gates
+├── backlog.md        # Synthetic consolidator for backlog items
+├── sprints.md        # Synthetic consolidator for sprints
+├── decisions.md      # Architecture Decision Records (ADRs)
+├── experience.md     # Incident logs and lessons learned
+├── backlog/          # Detailed backlog files (e.g. B-001.md)
+└── sprints/          # Detailed sprint logs (e.g. SPR-2026-01.md)
+```
+
+### Declaring a Backlog Item
+
+Detailed backlog files (e.g., `scrum/backlog/B-009.md`) use `mdbind` metadata to define their status, priorities, and relations:
+
+````markdown
+# B-009 - Create project README.md for PyPI publication
+
+```yaml
+section: backlog.item.B-009
+id: B-009
+title: Create project README.md for PyPI publication
+status: doing
+type: documentation
+po_priority: 2
+risk: low
+linked_sprint: SPR-2026-08
+owner: Guilherme
+created_at: 2026-06-10
+updated_at: 2026-06-10
+tags: [backlog, documentation, readme, pypi, apache-2.0]
+```
+
+## Objective
+...
+````
+
+---
+
+## Commands
+
+### Quick reference
+
+| Command | Subcommand | Option/Argument | Description |
+|---|---|---|---|
+| `smd init` | — | `--template-package`, `--target` | Initializes Scrum memory directory from a signed template package |
+| `smd validate` | — | `--root`, `--json` | Performs a full check of memory structure, IDs, and transitions |
+| `smd pack` | — | `<dir>`, `--output`, `--force` | Creates a checksum-signed template package zip with signature validation |
+| `smd backlog` | `list` | `--status`, `--pending` | Lists and filters backlog items from the consolidator |
+| `smd sprint` | `active` | `--root` | Retrieves the active sprint in the repository |
+| `smd template` | `render` | `--target`, `--project-name` | Renders template package files without creating full config |
+
+All commands accept `--json` for programmatic consumption by LLM agents. All outputs are deterministic.
+
+---
+
+## Philosophy
+
+Five principles behind Scrum.md memory management:
+
+1. **Machine-First, Human-Approved** — AI operates the routine, but humans approve gates and prioritize the backlog.
+2. **Determinism over Free Text** — CLI boundaries prevent structural hallucinations and ID collisions.
+3. **No Destructive History** — Operational events, decisions, and status histories must be appended, not erased.
+4. **Memory as a Graph** — All nodes (backlog, sprints, ADRs) are linked explicitly using MDBind directives.
+5. **Quality is Non-Negotiable** — Quality gates and Definition of Ready/Done are system-enforced.
+
+---
+
+## Development
+
+```bash
+# Install in editable mode
+pip install -e .
+
+# Run the full test suite
+python -m unittest discover -v
+```
+
+> 23 tests, 0 failures.
+
+---
+
+## License
+
+[Apache License, Version 2.0](https://opensource.org/licenses/Apache-2.0)
