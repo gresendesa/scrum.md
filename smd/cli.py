@@ -10,7 +10,15 @@ import typer
 from smd.config import load_config
 from smd.memory import MemoryRepository, ScrumRecord
 from smd.output import dumps, envelope
-from smd.template_packages import TemplatePackageError, TemplatePackagePackError, pack_template_package, render_template_package
+from smd.template_packages import (
+    TemplatePackageError,
+    TemplatePackagePackError,
+    TemplatePackageVariable,
+    inspect_template_package,
+    init_from_template_package,
+    pack_template_package,
+    render_template_package,
+)
 from smd.templates import DEFAULT_CONTEXT, TemplateRenderError
 
 
@@ -83,6 +91,121 @@ def main(
         ctx.obj["config"] = load_config(resolved_root)
     except ValueError as exc:
         _fail(ctx, "INVALID_CONFIG", str(exc), suggestion="Fix .smd/config.yml.")
+
+
+@app.command()
+def init(
+    ctx: typer.Context,
+    template_package: Annotated[
+        Path | None,
+        typer.Option(
+            "--template-package",
+            dir_okay=False,
+            resolve_path=True,
+            help="Local signed template package .zip.",
+        ),
+    ] = None,
+    target: Annotated[
+        Path | None,
+        typer.Option("--target", file_okay=False, resolve_path=True, help="Root to initialize."),
+    ] = None,
+    force: Annotated[bool, typer.Option("--force", help="Overwrite existing Scrum memory and config.")] = False,
+    project_name: Annotated[str | None, typer.Option("--project-name", help="Template project_name value.")] = None,
+    owner: Annotated[str | None, typer.Option("--owner", help="Template owner value.")] = None,
+    language: Annotated[str | None, typer.Option("--language", help="Template language value.")] = None,
+    purpose: Annotated[str | None, typer.Option("--purpose", help="Template purpose value.")] = None,
+    memory_root: Annotated[str | None, typer.Option("--memory-root", help="Scrum memory root directory.")] = None,
+    template_profile: Annotated[str | None, typer.Option("--template", help="Template profile name for config.")] = None,
+) -> None:
+    """Initialize Scrum memory from a signed local template package."""
+
+    root = _root(ctx)
+    target_root = (target or root).resolve()
+    context = _template_context(ctx)
+    json_output = _json_output(ctx)
+
+    if template_package is None:
+        if json_output:
+            _fail(
+                ctx,
+                "INVALID_INIT_INPUT",
+                "--template-package is required when --json is used.",
+                command="smd init",
+                root=target_root,
+                suggestion="Pass --template-package <file.zip> for deterministic JSON execution.",
+            )
+        template_package = Path(typer.prompt("Template package")).expanduser().resolve()
+    if not template_package.exists():
+        _fail(
+            ctx,
+            "INVALID_INIT_INPUT",
+            f"Template package does not exist: {template_package}.",
+            command="smd init",
+            root=target_root,
+            suggestion="Pass a local signed .zip package created by smd pack.",
+        )
+
+    try:
+        package = inspect_template_package(template_package, verify_signature=True)
+    except TemplatePackageError as exc:
+        _fail(
+            ctx,
+            "INIT_FAILED",
+            str(exc),
+            command="smd init",
+            root=target_root,
+            suggestion="Use a valid signed template package created by smd pack.",
+        )
+
+    option_values = {
+        "project_name": project_name,
+        "owner": owner,
+        "language": language,
+        "purpose": purpose,
+        "memory_root": memory_root,
+        "template_profile": template_profile,
+    }
+    context.update(_collect_init_variables(ctx, package.variables, context, option_values))
+    memory_root = str(context["memory_root"])
+    template_profile = str(context["template_profile"])
+
+    if not memory_root.strip() or Path(memory_root).is_absolute() or ".." in Path(memory_root).parts:
+        _fail(
+            ctx,
+            "INVALID_INIT_INPUT",
+            "--memory-root must be a safe relative path.",
+            command="smd init",
+            root=target_root,
+            suggestion="Use a relative memory root such as 'scrum'.",
+        )
+
+    try:
+        result = init_from_template_package(
+            template_package,
+            target_root,
+            context,
+            force=force,
+            memory_root=memory_root,
+            template_profile=template_profile,
+        )
+    except (TemplatePackageError, TemplateRenderError) as exc:
+        _fail(
+            ctx,
+            "INIT_FAILED",
+            str(exc),
+            command="smd init",
+            root=target_root,
+            suggestion="Use a valid signed template package and an empty target root, or pass --force explicitly.",
+        )
+
+    _emit(
+        ctx,
+        ok=True,
+        command="smd init",
+        root=target_root,
+        data=result,
+        human=f"Initialized Scrum memory in {target_root}.",
+    )
 
 
 @app.command()
@@ -198,13 +321,8 @@ def template_render(
     """Render Scrum memory files from a local template zip package."""
 
     root = _root(ctx)
-    config = _config(ctx)
     target_root = (target or root).resolve()
-    context = {
-        **DEFAULT_CONTEXT,
-        **{key: value for key, value in config.items() if not isinstance(value, dict)},
-        "template_profile": config.get("templates", {}).get("profile", DEFAULT_CONTEXT["template_profile"]),
-    }
+    context = _template_context(ctx)
     if project_name is not None:
         context["project_name"] = project_name
     if owner is not None:
@@ -242,6 +360,81 @@ def _root(ctx: typer.Context) -> Path:
 
 def _config(ctx: typer.Context) -> dict[str, Any]:
     return ctx.find_root().obj["config"]
+
+
+def _json_output(ctx: typer.Context) -> bool:
+    return bool(ctx.find_root().obj["json"])
+
+
+def _template_context(ctx: typer.Context) -> dict[str, Any]:
+    config = _config(ctx)
+    return {
+        **DEFAULT_CONTEXT,
+        **{key: value for key, value in config.items() if not isinstance(value, dict)},
+        "template_profile": config.get("templates", {}).get("profile", DEFAULT_CONTEXT["template_profile"]),
+    }
+
+
+def _collect_init_variables(
+    ctx: typer.Context,
+    variables: list[TemplatePackageVariable],
+    context: dict[str, Any],
+    option_values: dict[str, Any],
+) -> dict[str, Any]:
+    json_output = _json_output(ctx)
+    values: dict[str, Any] = {}
+    declared_names = {variable.name for variable in variables}
+
+    for name, value in option_values.items():
+        if value is not None:
+            values[name] = _validate_init_value(ctx, name, value)
+
+    for variable in variables:
+        if variable.name in values:
+            continue
+        default = variable.default if variable.default is not None else context.get(variable.name)
+        if json_output:
+            if default is None and variable.required:
+                _fail(
+                    ctx,
+                    "INVALID_INIT_INPUT",
+                    f"Missing required template variable '{variable.name}'.",
+                    command="smd init",
+                    suggestion="Pass the variable through an init option or use a package default.",
+                )
+            if default is not None:
+                values[variable.name] = _validate_init_value(ctx, variable.name, default)
+            continue
+
+        prompt_kwargs: dict[str, Any] = {}
+        if default is not None:
+            prompt_kwargs["default"] = str(default)
+        value = typer.prompt(variable.prompt, **prompt_kwargs)
+        if not value and not variable.required:
+            values[variable.name] = ""
+        else:
+            values[variable.name] = _validate_init_value(ctx, variable.name, value)
+
+    for name in ("memory_root", "template_profile"):
+        if name not in values:
+            values[name] = _validate_init_value(ctx, name, context[name])
+
+    for name, value in option_values.items():
+        if value is not None and name not in declared_names:
+            values[name] = _validate_init_value(ctx, name, value)
+
+    return values
+
+
+def _validate_init_value(ctx: typer.Context, name: str, value: Any) -> Any:
+    if isinstance(value, str) and not value.strip():
+        _fail(
+            ctx,
+            "INVALID_INIT_INPUT",
+            f"Template variable '{name}' must not be blank.",
+            command="smd init",
+        )
+    return value
 
 
 def _record_dict(record: ScrumRecord) -> dict[str, Any]:

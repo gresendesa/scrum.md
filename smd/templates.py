@@ -30,6 +30,24 @@ DEFAULT_CONTEXT: dict[str, Any] = {
     "memory_root": "scrum",
     "template_profile": "standard",
     "timezone": "America/Sao_Paulo",
+    "purpose": "Build and maintain an auditable Scrum memory for AI-assisted development.",
+    "nnr": [
+        "The official project memory lives under `scrum/`.",
+        "Memory files must use stable section metadata and references.",
+        "No backlog item or sprint may be marked `done` without validation evidence.",
+        "Protected governance changes require explicit Product Owner approval.",
+    ],
+    "strategic_priority": [
+        "Deliver a small, real MVP first.",
+        "Favor deterministic file operations and parseable output.",
+        "Validate behavior with automated tests before expanding scope.",
+    ],
+    "memory_policy": [
+        "Consolidators keep concise summaries only.",
+        "Detailed backlog items belong in `scrum/backlog/`.",
+        "Detailed sprints belong in `scrum/sprints/`.",
+        "Historical records must be marked obsolete or superseded instead of deleted.",
+    ],
 }
 
 

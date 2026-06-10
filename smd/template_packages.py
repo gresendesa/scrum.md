@@ -32,6 +32,16 @@ class TemplatePackageFile:
 
 
 @dataclass(frozen=True)
+class TemplatePackageVariable:
+    """One variable declared by a template package manifest."""
+
+    name: str
+    prompt: str
+    default: Any = None
+    required: bool = True
+
+
+@dataclass(frozen=True)
 class TemplatePackage:
     """Loaded template package metadata."""
 
@@ -39,6 +49,7 @@ class TemplatePackage:
     version: str | None
     files: list[TemplatePackageFile]
     instructions: list[str]
+    variables: list[TemplatePackageVariable]
 
 
 @dataclass(frozen=True)
@@ -48,6 +59,17 @@ class TemplatePackageRenderResult:
     package: dict[str, Any]
     files: list[str]
     instructions: list[str]
+
+
+@dataclass(frozen=True)
+class TemplatePackageInitResult:
+    """Result produced by initializing a project from a template package."""
+
+    package: dict[str, Any]
+    files: list[str]
+    instructions: list[str]
+    config_file: str
+    memory_root: str
 
 
 @dataclass(frozen=True)
@@ -96,6 +118,57 @@ def render_template_package(
             package={"name": package.name, "version": package.version},
             files=[file.path.as_posix() for file in rendered],
             instructions=package.instructions,
+        )
+
+
+def inspect_template_package(package_path: Path, *, verify_signature: bool = False) -> TemplatePackage:
+    """Load template package metadata without rendering files."""
+
+    package_path = package_path.resolve()
+    with TemporaryDirectory() as tmp:
+        extracted = Path(tmp)
+        package = _extract_package(package_path, extracted)
+        if verify_signature:
+            _verify_checksum_signature(extracted)
+        return package
+
+
+def init_from_template_package(
+    package_path: Path,
+    target_root: Path,
+    context: dict[str, Any],
+    *,
+    force: bool = False,
+    memory_root: str = "scrum",
+    template_profile: str = "standard",
+) -> TemplatePackageInitResult:
+    """Initialize project memory from a checksum-signed local template package."""
+
+    package_path = package_path.resolve()
+    target_root = target_root.resolve()
+    _prevent_existing_memory(target_root, memory_root, force=force)
+
+    with TemporaryDirectory() as tmp:
+        extracted = Path(tmp)
+        package = _extract_package(package_path, extracted)
+        _verify_checksum_signature(extracted)
+        rendered = _render_package_files(extracted, package, context)
+        _prevent_unapproved_overwrites(target_root, rendered, force=force)
+        write_rendered_files(target_root, rendered)
+        config_file = _write_init_config(
+            target_root,
+            memory_root=memory_root,
+            template_profile=template_profile,
+            package=package,
+            context=context,
+            force=force,
+        )
+        return TemplatePackageInitResult(
+            package={"name": package.name, "version": package.version},
+            files=[file.path.as_posix() for file in rendered],
+            instructions=package.instructions,
+            config_file=config_file,
+            memory_root=memory_root,
         )
 
 
@@ -186,6 +259,7 @@ def _read_pack_manifest(root: Path) -> dict[str, Any]:
 
     _validate_manifest_paths(root, data, "files", required_keys=("template", "target"))
     _validate_manifest_paths(root, data, "instructions")
+    _read_manifest_variables(data)
     return data
 
 
@@ -286,11 +360,13 @@ def _write_deterministic_zip(output_path: Path, files: list[tuple[str, bytes]]) 
 
 
 def _read_manifest(root: Path) -> TemplatePackage:
-    manifest_path = root / "template.yml"
+    manifest_path = root / MANIFEST_FILE
+    if not manifest_path.exists():
+        manifest_path = root / "template.yml"
     if not manifest_path.exists():
         manifest_path = root / "template.yaml"
     if not manifest_path.exists():
-        raise TemplatePackageError("Template package must include template.yml or template.yaml.")
+        raise TemplatePackageError("Template package must include manifest.yaml.")
 
     data = yaml.safe_load(manifest_path.read_text(encoding="utf-8")) or {}
     if not isinstance(data, dict):
@@ -332,7 +408,46 @@ def _read_manifest(root: Path) -> TemplatePackage:
     if version is not None:
         version = str(version)
 
-    return TemplatePackage(name=name, version=version, files=files, instructions=instructions)
+    variables = _read_manifest_variables(data)
+
+    return TemplatePackage(name=name, version=version, files=files, instructions=instructions, variables=variables)
+
+
+def _read_manifest_variables(data: dict[str, Any]) -> list[TemplatePackageVariable]:
+    raw_variables = data.get("variables", [])
+    if raw_variables is None:
+        return []
+    if not isinstance(raw_variables, list):
+        raise TemplatePackageError("Template manifest field 'variables' must be a list.")
+
+    variables: list[TemplatePackageVariable] = []
+    seen: set[str] = set()
+    for raw_variable in raw_variables:
+        if not isinstance(raw_variable, dict):
+            raise TemplatePackageError("Template manifest variable entries must be mappings.")
+        name = raw_variable.get("name")
+        if not isinstance(name, str) or not name.strip():
+            raise TemplatePackageError("Template manifest variables require a non-empty name.")
+        if name in seen:
+            raise TemplatePackageError(f"Template manifest variable '{name}' is duplicated.")
+        if not name.replace("_", "").isalnum() or name[0].isdigit():
+            raise TemplatePackageError(f"Template manifest variable '{name}' must be a simple identifier.")
+        prompt = raw_variable.get("prompt", name.replace("_", " ").title())
+        if not isinstance(prompt, str) or not prompt.strip():
+            raise TemplatePackageError(f"Template manifest variable '{name}' prompt must be a non-empty string.")
+        required = raw_variable.get("required", True)
+        if not isinstance(required, bool):
+            raise TemplatePackageError(f"Template manifest variable '{name}' required must be true or false.")
+        variables.append(
+            TemplatePackageVariable(
+                name=name,
+                prompt=prompt,
+                default=raw_variable.get("default"),
+                required=required,
+            )
+        )
+        seen.add(name)
+    return variables
 
 
 def _render_package_files(root: Path, package: TemplatePackage, context: dict[str, Any]) -> list[RenderedFile]:
@@ -368,6 +483,114 @@ def _prevent_unapproved_overwrites(target_root: Path, files: list[RenderedFile],
     if conflicting:
         joined = ", ".join(conflicting)
         raise TemplatePackageError(f"Refusing to overwrite existing files without --force: {joined}.")
+
+
+def _prevent_existing_memory(target_root: Path, memory_root: str, *, force: bool) -> None:
+    if force:
+        return
+    existing = []
+    memory_path = target_root / memory_root
+    config_path = target_root / ".smd" / "config.yml"
+    if memory_path.exists():
+        existing.append(memory_path.relative_to(target_root).as_posix())
+    if config_path.exists():
+        existing.append(config_path.relative_to(target_root).as_posix())
+    if existing:
+        raise TemplatePackageError(f"Refusing to initialize over existing memory without --force: {', '.join(existing)}.")
+
+
+def _write_init_config(
+    target_root: Path,
+    *,
+    memory_root: str,
+    template_profile: str,
+    package: TemplatePackage,
+    context: dict[str, Any],
+    force: bool,
+) -> str:
+    config_path = target_root / ".smd" / "config.yml"
+    if config_path.exists() and not force:
+        raise TemplatePackageError("Refusing to overwrite .smd/config.yml without --force.")
+    config_path.parent.mkdir(parents=True, exist_ok=True)
+    config = {
+        "memory_root": memory_root,
+        "templates": {
+            "profile": template_profile,
+            "package": package.name,
+            "version": package.version,
+        },
+        "project": {
+            "name": context.get("project_name"),
+            "owner": context.get("owner"),
+            "language": context.get("language"),
+            "timezone": context.get("timezone"),
+        },
+    }
+    config_path.write_text(yaml.safe_dump(config, sort_keys=False, allow_unicode=False), encoding="utf-8")
+    return config_path.relative_to(target_root).as_posix()
+
+
+def _verify_checksum_signature(root: Path) -> None:
+    signature_path = root / SIGNATURE_FILE
+    if not signature_path.exists():
+        raise TemplatePackageError("Template package must include SIGNATURE.yaml.")
+
+    signature = yaml.safe_load(signature_path.read_text(encoding="utf-8")) or {}
+    if not isinstance(signature, dict):
+        raise TemplatePackageError("SIGNATURE.yaml must contain a YAML mapping.")
+    if signature.get("policy") != "checksum-only":
+        raise TemplatePackageError("SIGNATURE.yaml policy must be 'checksum-only'.")
+    if signature.get("algorithm") != "sha256":
+        raise TemplatePackageError("SIGNATURE.yaml algorithm must be 'sha256'.")
+    if signature.get("scope") != "file_contents_relative_paths_deterministic_order":
+        raise TemplatePackageError("SIGNATURE.yaml scope is not supported.")
+
+    raw_files = signature.get("files")
+    if not isinstance(raw_files, list) or not raw_files:
+        raise TemplatePackageError("SIGNATURE.yaml must list signed files.")
+
+    signed_paths: set[str] = set()
+    normalized_files: list[dict[str, Any]] = []
+    for item in raw_files:
+        if not isinstance(item, dict):
+            raise TemplatePackageError("SIGNATURE.yaml file entries must be mappings.")
+        path = item.get("path")
+        digest = item.get("sha256")
+        size = item.get("size")
+        if not isinstance(path, str) or not isinstance(digest, str) or not isinstance(size, int):
+            raise TemplatePackageError("SIGNATURE.yaml file entries require path, sha256, and size.")
+        _assert_safe_relative(path, "Signature path")
+        if path == SIGNATURE_FILE:
+            raise TemplatePackageError("SIGNATURE.yaml must not sign itself.")
+        file_path = root / path
+        if not file_path.exists() or not file_path.is_file():
+            raise TemplatePackageError(f"Signed file '{path}' does not exist in the package.")
+        content = file_path.read_bytes()
+        if len(content) != size or sha256(content).hexdigest() != digest:
+            raise TemplatePackageError(f"Checksum verification failed for '{path}'.")
+        signed_paths.add(path)
+        normalized_files.append({"path": path, "sha256": digest})
+
+    package_files = {
+        path.relative_to(root).as_posix()
+        for path in root.rglob("*")
+        if path.is_file() and path.relative_to(root).as_posix() != SIGNATURE_FILE
+    }
+    unsigned = sorted(package_files - signed_paths)
+    if unsigned:
+        raise TemplatePackageError(f"Template package contains unsigned files: {', '.join(unsigned)}.")
+    missing = sorted(signed_paths - package_files)
+    if missing:
+        raise TemplatePackageError(f"SIGNATURE.yaml references missing files: {', '.join(missing)}.")
+    if MANIFEST_FILE not in signed_paths:
+        raise TemplatePackageError("SIGNATURE.yaml must sign manifest.yaml.")
+
+    expected_payload = "\n".join(
+        f"{item['path']} {item['sha256']}" for item in sorted(normalized_files, key=lambda value: value["path"])
+    ).encode("utf-8")
+    expected_digest = sha256(expected_payload).hexdigest()
+    if signature.get("digest") != expected_digest:
+        raise TemplatePackageError("SIGNATURE.yaml digest verification failed.")
 
 
 def _assert_safe_relative(path: str, label: str) -> None:

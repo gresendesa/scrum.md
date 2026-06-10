@@ -200,6 +200,159 @@ class CliTests(unittest.TestCase):
             self.assertFalse(payload["ok"])
             self.assertIn("without --force", payload["errors"][0]["message"])
 
+    def test_init_from_signed_template_package_creates_memory_and_config(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = _make_package_directory(root / "package")
+            package = root / "package.zip"
+            pack_result = self.runner.invoke(
+                app,
+                ["--root", str(root), "--json", "pack", str(source), "--output", str(package)],
+            )
+            self.assertEqual(pack_result.exit_code, 0, pack_result.output)
+            target = root / "target"
+
+            result = self.runner.invoke(
+                app,
+                [
+                    "--root",
+                    str(target),
+                    "--json",
+                    "init",
+                    "--template-package",
+                    str(package),
+                    "--project-name",
+                    "fixture",
+                    "--owner",
+                    "Tester",
+                ],
+            )
+
+            self.assertEqual(result.exit_code, 0, result.output)
+            payload = json.loads(result.output)
+            self.assertTrue(payload["ok"])
+            self.assertEqual(payload["command"], "smd init")
+            self.assertEqual(payload["root"], str(target.resolve()))
+            self.assertEqual(payload["data"]["package"]["name"], "fixture")
+            self.assertEqual(payload["data"]["files"], ["scrum/backlog/B-001.md"])
+            self.assertEqual(payload["data"]["config_file"], ".smd/config.yml")
+            self.assertTrue((target / "scrum" / "backlog" / "B-001.md").exists())
+            config = yaml.safe_load((target / ".smd" / "config.yml").read_text(encoding="utf-8"))
+            self.assertEqual(config["memory_root"], "scrum")
+            self.assertEqual(config["templates"]["package"], "fixture")
+            self.assertEqual(config["project"]["name"], "fixture")
+            self.assertEqual(config["project"]["owner"], "Tester")
+
+    def test_init_prompts_for_missing_human_inputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = _make_package_directory(root / "package")
+            package = root / "package.zip"
+            pack_result = self.runner.invoke(
+                app,
+                ["--root", str(root), "--json", "pack", str(source), "--output", str(package)],
+            )
+            self.assertEqual(pack_result.exit_code, 0, pack_result.output)
+            target = root / "target"
+
+            result = self.runner.invoke(
+                app,
+                ["--root", str(target), "init"],
+                input=f"{package}\nPrompted Project\nPrompt Owner\npt-BR\nscrum\nstandard\n",
+            )
+
+            self.assertEqual(result.exit_code, 0, result.output)
+            self.assertIn("Template package", result.output)
+            self.assertIn("Workspace name", result.output)
+            self.assertIn("Project owner", result.output)
+            self.assertTrue((target / "scrum" / "backlog" / "B-001.md").exists())
+            config = yaml.safe_load((target / ".smd" / "config.yml").read_text(encoding="utf-8"))
+            self.assertEqual(config["project"]["name"], "Prompted Project")
+            self.assertEqual(config["project"]["owner"], "Prompt Owner")
+            self.assertEqual(config["project"]["language"], "pt-BR")
+
+    def test_init_json_requires_template_package_without_prompting(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+
+            result = self.runner.invoke(app, ["--root", str(root / "target"), "--json", "init"])
+
+            self.assertEqual(result.exit_code, 1, result.output)
+            payload = json.loads(result.output)
+            self.assertFalse(payload["ok"])
+            self.assertEqual(payload["errors"][0]["code"], "INVALID_INIT_INPUT")
+            self.assertIn("--template-package is required", payload["errors"][0]["message"])
+
+    def test_init_rejects_unsigned_template_package(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            package = _make_template_package(root / "unsigned.zip")
+
+            result = self.runner.invoke(
+                app,
+                ["--root", str(root / "target"), "--json", "init", "--template-package", str(package)],
+            )
+
+            self.assertEqual(result.exit_code, 1, result.output)
+            payload = json.loads(result.output)
+            self.assertFalse(payload["ok"])
+            self.assertEqual(payload["errors"][0]["code"], "INIT_FAILED")
+            self.assertIn("SIGNATURE.yaml", payload["errors"][0]["message"])
+
+    def test_init_protects_existing_memory_without_force(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = _make_package_directory(root / "package")
+            package = root / "package.zip"
+            pack_result = self.runner.invoke(
+                app,
+                ["--root", str(root), "--json", "pack", str(source), "--output", str(package)],
+            )
+            self.assertEqual(pack_result.exit_code, 0, pack_result.output)
+            target = root / "target"
+            (target / "scrum").mkdir(parents=True)
+
+            result = self.runner.invoke(
+                app,
+                ["--root", str(target), "--json", "init", "--template-package", str(package)],
+            )
+
+            self.assertEqual(result.exit_code, 1, result.output)
+            payload = json.loads(result.output)
+            self.assertFalse(payload["ok"])
+            self.assertEqual(payload["errors"][0]["code"], "INIT_FAILED")
+            self.assertIn("existing memory", payload["errors"][0]["message"])
+
+    def test_init_rejects_blank_project_name(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = _make_package_directory(root / "package")
+            package = root / "package.zip"
+            pack_result = self.runner.invoke(
+                app,
+                ["--root", str(root), "--json", "pack", str(source), "--output", str(package)],
+            )
+            self.assertEqual(pack_result.exit_code, 0, pack_result.output)
+
+            result = self.runner.invoke(
+                app,
+                [
+                    "--root",
+                    str(root / "target"),
+                    "--json",
+                    "init",
+                    "--template-package",
+                    str(package),
+                    "--project-name",
+                    " ",
+                ],
+            )
+
+            self.assertEqual(result.exit_code, 1, result.output)
+            payload = json.loads(result.output)
+            self.assertFalse(payload["ok"])
+            self.assertEqual(payload["errors"][0]["code"], "INVALID_INIT_INPUT")
+
 
 def _make_template_package(path: Path) -> Path:
     manifest = """
@@ -207,6 +360,27 @@ name: fixture
 version: "1.0"
 instructions:
   - instructions/LLM.md
+variables:
+  - name: project_name
+    prompt: Workspace name
+    default: fixture
+    required: true
+  - name: owner
+    prompt: Project owner
+    default: Tester
+    required: true
+  - name: language
+    prompt: Documentation language
+    default: en
+    required: true
+  - name: memory_root
+    prompt: Memory root directory
+    default: scrum
+    required: true
+  - name: template_profile
+    prompt: Template profile
+    default: standard
+    required: true
 files:
   - template: templates/backlog_item.md.j2
     target: scrum/backlog/B-001.md
@@ -241,6 +415,27 @@ template_engine: jinja2
 smd_version: "0.1.0"
 instructions:
   - instructions/LLM.md
+variables:
+  - name: project_name
+    prompt: Workspace name
+    default: fixture
+    required: true
+  - name: owner
+    prompt: Project owner
+    default: Tester
+    required: true
+  - name: language
+    prompt: Documentation language
+    default: en
+    required: true
+  - name: memory_root
+    prompt: Memory root directory
+    default: scrum
+    required: true
+  - name: template_profile
+    prompt: Template profile
+    default: standard
+    required: true
 files:
   - template: templates/backlog_item.md.j2
     target: scrum/backlog/B-001.md

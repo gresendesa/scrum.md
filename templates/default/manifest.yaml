@@ -6,6 +6,31 @@ template_engine: jinja2
 smd_version: "0.1.0"
 instructions:
   - instructions/LLM.md
+variables:
+  - name: project_name
+    prompt: Project name
+    default: scrum.md
+    required: true
+  - name: owner
+    prompt: Owner
+    default: Guilherme
+    required: true
+  - name: purpose
+    prompt: Purpose
+    default: Build and maintain an auditable Scrum memory for AI-assisted development.
+    required: true
+  - name: language
+    prompt: Language
+    default: en
+    required: true
+  - name: memory_root
+    prompt: Memory root
+    default: scrum
+    required: true
+  - name: template_profile
+    prompt: Template profile
+    default: standard
+    required: true
 files:
   - template: CONSTITUTION.md.j2
     target: scrum/CONSTITUTION.md

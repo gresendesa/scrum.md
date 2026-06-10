@@ -30,7 +30,7 @@ title: Backlog Objective
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-08
+updated_at: 2026-06-10
 tags: [objective, backlog]
 ```
 
@@ -94,6 +94,7 @@ items:
   - B-003
   - B-004
   - B-006
+  - B-007
 tags: [backlog, done]
 ```
 
@@ -192,6 +193,26 @@ updated_at: 2026-06-09
 [@ref: Detailed backlog item](backlog/B-006.md#backlog.item.B-006)
 [@ref: Closed sprint](sprints/SPR-2026-05.md#sprint.SPR-2026-05)
 
+#### B-007 - Implement smd init from signed template packages
+
+```yaml
+section: backlog.synthetic-summary.done.B-007
+id: B-007
+title: Implement smd init from signed template packages
+status: done
+po_priority: 2
+risk: medium
+linked_sprint: SPR-2026-06
+detail_file: scrum/backlog/B-007.md
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-10
+```
+
+[@ref: Detailed backlog item](backlog/B-007.md#backlog.item.B-007)
+[@ref: Closed sprint](sprints/SPR-2026-06.md#sprint.SPR-2026-06)
+[@ref: Package command backlog item](backlog/B-006.md#backlog.item.B-006)
+
 ### Pending
 
 ```yaml
@@ -204,7 +225,7 @@ updated_at: 2026-06-09
 item_status: todo
 items:
   - B-005
-  - B-007
+  - B-008
 tags: [backlog, pending]
 ```
 
@@ -227,23 +248,23 @@ updated_at: 2026-06-09
 [@ref: Detailed backlog item](backlog/B-005.md#backlog.item.B-005)
 [@ref: AI workflow](../specification.md#specification.ai-workflow)
 
-#### B-007 - Implement smd init from signed template packages
+#### B-008 - Move template governance files under scrum
 
 ```yaml
-section: backlog.synthetic-summary.pending.B-007
-id: B-007
-title: Implement smd init from signed template packages
+section: backlog.synthetic-summary.pending.B-008
+id: B-008
+title: Move template governance files under scrum
 status: todo
-po_priority:
-risk: medium
+po_priority: 2
+risk: low
 linked_sprint:
-detail_file: scrum/backlog/B-007.md
+detail_file: scrum/backlog/B-008.md
 owner: Guilherme
 created_at: 2026-06-09
 updated_at: 2026-06-09
 ```
 
-[@ref: Detailed backlog item](backlog/B-007.md#backlog.item.B-007)
+[@ref: Detailed backlog item](backlog/B-008.md#backlog.item.B-008)
 [@ref: Package command backlog item](backlog/B-006.md#backlog.item.B-006)
 
 ### Refined
@@ -270,7 +291,7 @@ title: Planned Backlog Items
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-08
+updated_at: 2026-06-09
 item_status: planned
 items: []
 tags: [backlog, planned]

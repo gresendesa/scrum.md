@@ -72,6 +72,7 @@ sprints:
   - SPR-2026-03
   - SPR-2026-04
   - SPR-2026-05
+  - SPR-2026-06
 tags: [sprints, registry]
 ```
 
@@ -125,7 +126,7 @@ sprint_risk: medium
 detail_file: scrum/sprints/SPR-2026-03.md
 owner: Guilherme
 created_at: 2026-06-09
-updated_at: 2026-06-09
+updated_at: 2026-06-10
 ```
 
 [@ref: Detailed sprint](sprints/SPR-2026-03.md#sprint.SPR-2026-03)
@@ -165,6 +166,24 @@ updated_at: 2026-06-09
 ```
 
 [@ref: Detailed sprint](sprints/SPR-2026-05.md#sprint.SPR-2026-05)
+
+### SPR-2026-06 - Initialize projects from signed template packages
+
+```yaml
+section: sprints.SPR-2026-06
+sprint_id: SPR-2026-06
+title: Initialize projects from signed template packages
+status: done
+focus: Implement `smd init` so a project can be initialized from a checksum-signed template package produced by `smd pack`.
+po_priority_summary: B-007 priority 2 high; B-008 priority 2 high deferred; B-005 priority 4 low deferred.
+sprint_risk: medium
+detail_file: scrum/sprints/SPR-2026-06.md
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
+```
+
+[@ref: Detailed sprint](sprints/SPR-2026-06.md#sprint.SPR-2026-06)
 
 ### SPR-YYYY-NN Template
 
