@@ -6,7 +6,7 @@ title: Backlog Consolidator
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-09
+updated_at: 2026-06-10
 type: consolidator
 scope: backlog
 detail_directory: scrum/backlog/
@@ -242,7 +242,7 @@ title: Pending Backlog Items
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-09
+updated_at: 2026-06-10
 item_status: todo
 items:
   - B-005
@@ -326,11 +326,29 @@ owner: Guilherme
 created_at: 2026-06-09
 updated_at: 2026-06-10
 item_status: review
-items: []
+items:
+  - B-009
 tags: [backlog, review]
 ```
 
-No items registered.
+#### B-009 - Create project README.md for PyPI publication
+
+```yaml
+section: backlog.synthetic-summary.review.B-009
+id: B-009
+title: Create project README.md for PyPI publication
+status: review
+po_priority: 2
+risk: low
+linked_sprint: SPR-2026-08
+detail_file: scrum/backlog/B-009.md
+owner: Guilherme
+created_at: 2026-06-10
+updated_at: 2026-06-10
+```
+
+[@ref: Detailed backlog item](backlog/B-009.md#backlog.item.B-009)
+[@ref: Active sprint](sprints/SPR-2026-08.md#sprint.SPR-2026-08)
 
 ## Synthetic Template for New Items
 

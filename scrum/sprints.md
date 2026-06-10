@@ -6,7 +6,7 @@ title: Sprints Consolidator
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-09
+updated_at: 2026-06-10
 type: consolidator
 scope: sprints
 detail_directory: scrum/sprints/
@@ -65,7 +65,7 @@ title: Registered Sprints
 status: active
 owner: Guilherme
 created_at: 2026-06-08
-updated_at: 2026-06-09
+updated_at: 2026-06-10
 sprints:
   - SPR-2026-01
   - SPR-2026-02
@@ -74,6 +74,7 @@ sprints:
   - SPR-2026-05
   - SPR-2026-06
   - SPR-2026-07
+  - SPR-2026-08
 tags: [sprints, registry]
 ```
 
@@ -203,6 +204,24 @@ updated_at: 2026-06-10
 ```
 
 [@ref: Detailed sprint](sprints/SPR-2026-07.md#sprint.SPR-2026-07)
+
+### SPR-2026-08 - PyPI publication readiness and README.md
+
+```yaml
+section: sprints.SPR-2026-08
+sprint_id: SPR-2026-08
+title: PyPI publication readiness and README.md
+status: review
+focus: Create a PyPI-compatible README.md in the project root with appropriate badges, command table, and licensing information.
+po_priority_summary: B-009 priority 2 high; B-005 priority 4 low deferred.
+sprint_risk: low
+detail_file: scrum/sprints/SPR-2026-08.md
+owner: Guilherme
+created_at: 2026-06-10
+updated_at: 2026-06-10
+```
+
+[@ref: Detailed sprint](sprints/SPR-2026-08.md#sprint.SPR-2026-08)
 
 ### SPR-YYYY-NN Template
 
