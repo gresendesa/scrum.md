@@ -52,6 +52,8 @@ tags: [constraints, cli]
 * MDBind behavior must be checked against `mdbind.md` when implementation details are unclear.
 * MDBind is installed with `pip install mdbind` and should be integrated directly as a Python library for core validation.
 * Jinja2 is the template renderer for generated Scrum memory files.
+* Templates are distributed as `.zip` packages containing Jinja files and package-specific LLM instructions.
+* Future template distribution should support web download, but SPR-2026-04 starts with local `.zip` packages.
 
 [@ref: Command reference](../specification.md#specification.commands)
 [@ref: JSON output contract](../specification.md#specification.output-contract)
@@ -71,7 +73,9 @@ components:
   - command_router
   - config_loader
   - template_renderer
+  - template_package_loader
   - jinja2_templates
+  - llm_template_instructions
   - memory_repository
   - markdown_metadata_parser
   - validators
@@ -112,6 +116,7 @@ language: Python
 cli_framework: Typer
 template_engine: Jinja2
 mdbind_integration: direct_python_library
+template_distribution: zip_package
 first_backlog_items:
   - B-002
   - B-003
@@ -122,4 +127,5 @@ tags: [architecture, implementation, foundation]
 The first implementation foundation should deliver agent-operable Jinja2 templates, then memory/MDBind query primitives, then the Typer CLI shell.
 
 [@ref: Architecture decision](decisions.md#decisions.DEC-005)
+[@ref: Template package decision](decisions.md#decisions.DEC-006)
 [@ref: Template foundation](backlog/B-002.md#backlog.item.B-002)

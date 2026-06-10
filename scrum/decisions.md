@@ -79,6 +79,7 @@ decisions:
   - DEC-003
   - DEC-004
   - DEC-005
+  - DEC-006
 tags: [decisions, history]
 ```
 
@@ -197,6 +198,29 @@ affected_files:
   - scrum/architecture.md
   - scrum/decisions.md
 future_review: Revisit once B-004 validates whether the public MDBind Python APIs are stable enough for direct integration.
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
+```
+
+### DEC-006 - Distribute templates as zip packages with LLM instructions
+
+```yaml
+section: decisions.DEC-006
+id: DEC-006
+title: Distribute templates as zip packages with LLM instructions
+date: 2026-06-09
+status: approved
+context: The PO clarified before SPR-2026-04 execution that templates should be supplied as standalone packages and later downloadable from the web.
+decision: Treat each template as a `.zip` package containing Jinja files plus its own clear instructions for LLM agents. The LLM best-practices manual belongs inside the template package, not only in repository documentation.
+impact: B-004 must support local template zip packages before full web download support, and B-005 must produce package-level LLM guidance for real Scrum scenarios, rituals, transitions, gates, and information retrieval.
+affected_files:
+  - scrum/backlog/B-004.md
+  - scrum/backlog/B-005.md
+  - scrum/sprints/SPR-2026-04.md
+  - scrum/architecture.md
+  - scrum/decisions.md
+future_review: Add web download, caching, trust, checksum, and version policies when remote template distribution enters scope.
 owner: Guilherme
 created_at: 2026-06-09
 updated_at: 2026-06-09

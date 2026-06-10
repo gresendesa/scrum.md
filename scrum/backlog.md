@@ -163,29 +163,9 @@ created_at: 2026-06-08
 updated_at: 2026-06-09
 item_status: todo
 items:
-  - B-004
   - B-005
 tags: [backlog, pending]
 ```
-
-#### B-004 - Build Python CLI shell and JSON contract
-
-```yaml
-section: backlog.synthetic-summary.pending.B-004
-id: B-004
-title: Build Python CLI shell and JSON contract
-status: todo
-po_priority: 2
-risk: medium
-linked_sprint:
-detail_file: scrum/backlog/B-004.md
-owner: Guilherme
-created_at: 2026-06-09
-updated_at: 2026-06-09
-```
-
-[@ref: Detailed backlog item](backlog/B-004.md#backlog.item.B-004)
-[@ref: JSON contract](../specification.md#specification.output-contract)
 
 #### B-005 - Create LLM best practices manual for smd usage
 
@@ -232,11 +212,29 @@ owner: Guilherme
 created_at: 2026-06-08
 updated_at: 2026-06-08
 item_status: planned
-items: []
+items:
+  - B-004
 tags: [backlog, planned]
 ```
 
-No items registered.
+#### B-004 - Build Python CLI shell and JSON contract
+
+```yaml
+section: backlog.synthetic-summary.planned.B-004
+id: B-004
+title: Build Python CLI shell and JSON contract
+status: planned
+po_priority: 2
+risk: medium
+linked_sprint: SPR-2026-04
+detail_file: scrum/backlog/B-004.md
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
+```
+
+[@ref: Detailed backlog item](backlog/B-004.md#backlog.item.B-004)
+[@ref: Planned sprint](sprints/SPR-2026-04.md#sprint.SPR-2026-04)
 
 ### Doing
 

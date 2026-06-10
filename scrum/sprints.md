@@ -70,6 +70,7 @@ sprints:
   - SPR-2026-01
   - SPR-2026-02
   - SPR-2026-03
+  - SPR-2026-04
 tags: [sprints, registry]
 ```
 
@@ -127,6 +128,24 @@ updated_at: 2026-06-09
 ```
 
 [@ref: Detailed sprint](sprints/SPR-2026-03.md#sprint.SPR-2026-03)
+
+### SPR-2026-04 - Python CLI shell and JSON contract
+
+```yaml
+section: sprints.SPR-2026-04
+sprint_id: SPR-2026-04
+title: Python CLI shell and JSON contract
+status: planned
+focus: Expose the implemented memory foundation through the `smd` Typer CLI shell and stable JSON envelope.
+po_priority_summary: B-004 priority 2 high; B-005 priority 4 low deferred.
+sprint_risk: medium
+detail_file: scrum/sprints/SPR-2026-04.md
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
+```
+
+[@ref: Detailed sprint](sprints/SPR-2026-04.md#sprint.SPR-2026-04)
 
 ### SPR-YYYY-NN Template
 
