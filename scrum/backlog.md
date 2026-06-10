@@ -164,6 +164,7 @@ updated_at: 2026-06-09
 item_status: todo
 items:
   - B-004
+  - B-005
 tags: [backlog, pending]
 ```
 
@@ -185,6 +186,25 @@ updated_at: 2026-06-09
 
 [@ref: Detailed backlog item](backlog/B-004.md#backlog.item.B-004)
 [@ref: JSON contract](../specification.md#specification.output-contract)
+
+#### B-005 - Create LLM best practices manual for smd usage
+
+```yaml
+section: backlog.synthetic-summary.pending.B-005
+id: B-005
+title: Create LLM best practices manual for smd usage
+status: todo
+po_priority: 4
+risk: low
+linked_sprint:
+detail_file: scrum/backlog/B-005.md
+owner: Guilherme
+created_at: 2026-06-09
+updated_at: 2026-06-09
+```
+
+[@ref: Detailed backlog item](backlog/B-005.md#backlog.item.B-005)
+[@ref: AI workflow](../specification.md#specification.ai-workflow)
 
 ### Refined
 
